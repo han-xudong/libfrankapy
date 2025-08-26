@@ -326,13 +326,12 @@ class CustomBuildExt(build_ext):
         compiler_type = self.compiler.compiler_type
         if compiler_type == "unix":
             # Add optimization flags for release builds
+            # Note: Removed -march=native and -mtune=native for CI compatibility
             for ext in self.extensions:
-                ext.extra_compile_args.extend(
-                    [
-                        "-march=native",
-                        "-mtune=native",
-                    ]
-                )
+                # Only add safe optimization flags that work in CI environments
+                # -O3 is already included in base compile args, so only add -DNDEBUG
+                if "-DNDEBUG" not in ext.extra_compile_args:
+                    ext.extra_compile_args.append("-DNDEBUG")
 
         # Call parent build
         super().build_extensions()

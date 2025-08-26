@@ -6,6 +6,10 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <pthread.h>
+#include <sys/mman.h>
+#include <cerrno>
+#include <cstring>
 
 #include "realtime_controller.hpp"
 
