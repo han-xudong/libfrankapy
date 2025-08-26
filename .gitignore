@@ -197,7 +197,9 @@ CMakeCache.txt
 CMakeFiles/
 CMakeScripts/
 Testing/
+# Makefile (exclude docs/Makefile)
 Makefile
+!docs/Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
