@@ -231,7 +231,7 @@ void update_timestamp(std::atomic<uint64_t>& timestamp) {
 /**
  * @brief Check if timestamp is recent (within timeout)
  */
-bool is_timestamp_recent(uint64_t timestamp, uint64_t timeout_us = 1000000) {
+bool is_timestamp_recent(uint64_t timestamp, uint64_t timeout_us) {
   uint64_t current = get_current_timestamp();
   return (current - timestamp) < timeout_us;
 }
