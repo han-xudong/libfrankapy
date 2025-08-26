@@ -164,10 +164,10 @@ class RobotState:
             return False
 
         # Consider in contact if external force/torque > threshold
-        force_threshold = 5.0  # N
-        torque_threshold = 1.0  # Nm
+        force_threshold: float = 5.0  # N
+        torque_threshold: float = 1.0  # Nm
 
-        force_magnitude = sum(f**2 for f in self.external_wrench.force) ** 0.5
-        torque_magnitude = sum(t**2 for t in self.external_wrench.torque) ** 0.5
+        force_magnitude: float = sum(f**2 for f in self.external_wrench.force) ** 0.5
+        torque_magnitude: float = sum(t**2 for t in self.external_wrench.torque) ** 0.5
 
-        return force_magnitude > force_threshold or torque_magnitude > torque_threshold
+        return bool(force_magnitude > force_threshold or torque_magnitude > torque_threshold)

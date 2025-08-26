@@ -200,9 +200,10 @@ class FrankaRobot:
             if success:
                 self._connected = True
                 # Connect state reader to shared memory
-                self._state_reader.connect()
+                if self._state_reader:
+                    self._state_reader.connect()
                 print(f"Successfully connected to robot at {self.robot_ip}")
-            return success
+            return bool(success)
         except Exception as e:
             raise ConnectionError(f"Failed to connect to robot: {e}")
 
@@ -238,7 +239,7 @@ class FrankaRobot:
         try:
             connected = self._controller.is_connected()
             self._connected = connected
-            return connected
+            return bool(connected)
         except Exception:
             self._connected = False
             return False
@@ -267,7 +268,7 @@ class FrankaRobot:
             if success:
                 self._control_running = True
                 print("Real-time control loop started")
-            return success
+            return bool(success)
         except Exception as e:
             raise ControlError(f"Failed to start control loop: {e}")
 
@@ -296,7 +297,7 @@ class FrankaRobot:
         try:
             running = self._controller.is_control_running()
             self._control_running = running
-            return running
+            return bool(running)
         except Exception:
             self._control_running = False
             return False
@@ -435,7 +436,7 @@ class FrankaRobot:
 
         try:
             torques = self._controller.get_joint_torques()
-            return torques.tolist()
+            return list(torques.tolist())
         except Exception as e:
             raise StateError(f"Failed to get joint torques: {e}")
 
@@ -449,7 +450,7 @@ class FrankaRobot:
             return False
 
         try:
-            return self._controller.is_moving()
+            return bool(self._controller.is_moving())
         except Exception:
             return False
 
@@ -463,7 +464,7 @@ class FrankaRobot:
             return True
 
         try:
-            return self._controller.has_error()
+            return bool(self._controller.has_error())
         except Exception:
             return True
 
@@ -477,7 +478,7 @@ class FrankaRobot:
             return -999
 
         try:
-            return self._controller.get_error_code()
+            return int(self._controller.get_error_code())
         except Exception:
             return -999
 
@@ -491,7 +492,7 @@ class FrankaRobot:
             return 0.0
 
         try:
-            return self._controller.get_control_frequency()
+            return float(self._controller.get_control_frequency())
         except Exception:
             return 0.0
 
@@ -531,7 +532,7 @@ class FrankaRobot:
             return False
 
         try:
-            return self._controller.wait_for_command_completion(timeout)
+            return bool(self._controller.wait_for_command_completion(timeout))
         except Exception:
             return False
 
@@ -540,7 +541,7 @@ class FrankaRobot:
         self.connect()
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         """Context manager exit."""
         self.disconnect()
 
