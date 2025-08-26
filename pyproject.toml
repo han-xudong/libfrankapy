@@ -13,7 +13,7 @@ version = "0.1.0"
 description = "Python bindings for libfranka with real-time control"
 readme = "README.md"
 requires-python = ">=3.8"
-license = "Apache-2.0"
+license = {text = "Apache-2.0"}
 authors = [
     {name = "libfrankapy Team", email = "support@libfrankapy.org"},
 ]
