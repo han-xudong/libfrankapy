@@ -1,5 +1,5 @@
 export default {
-  title: 'LibFrankaPy',
+  title: 'libfrankapy',
   description: 'Python interface for Franka Emika robots',
   base: '/libfrankapy/',
   

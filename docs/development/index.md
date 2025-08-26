@@ -1,14 +1,14 @@
 # Development Guide
 
-Welcome to the LibFrankaPy development guide. This section contains comprehensive information for developers who want to contribute to or understand the internals of LibFrankaPy.
+Welcome to the libfrankapy development guide. This section contains comprehensive information for developers who want to contribute to or understand the internals of libfrankapy.
 
 ## Overview
 
-LibFrankaPy is designed as a high-performance Python interface for Franka Emika robots, combining the ease of Python with the real-time capabilities of C++. This development guide will help you understand the architecture, contribute effectively, and maintain high code quality.
+libfrankapy is designed as a high-performance Python interface for Franka Emika robots, combining the ease of Python with the real-time capabilities of C++. This development guide will help you understand the architecture, contribute effectively, and maintain high code quality.
 
 ## Getting Started
 
-If you're new to LibFrankaPy development, we recommend starting with:
+If you're new to libfrankapy development, we recommend starting with:
 
 1. **[Architecture Overview](./architecture)** - Understand the system design and core components
 2. **[Contributing Guide](./contributing)** - Learn how to set up your development environment and contribute
@@ -120,4 +120,4 @@ If you need help with development:
 3. **Ask Questions**: Open a discussion or issue if you can't find the answer
 4. **Join the Community**: Connect with other developers and users
 
-We're here to help you succeed in contributing to LibFrankaPy!
+We're here to help you succeed in contributing to libfrankapy!

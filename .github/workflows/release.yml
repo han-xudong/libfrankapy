@@ -165,7 +165,7 @@ jobs:
         pip install dist/*.whl
 
         # Run basic import test
-        python -c "import libfrankapy; print(f'LibFrankaPy version: {libfrankapy.__version__}')"
+        python -c "import libfrankapy; print(f'libfrankapy version: {libfrankapy.__version__}')"
 
         # Run unit tests
         pip install pytest pytest-mock
@@ -220,7 +220,7 @@ jobs:
           CHANGELOG=$(git log --pretty=format:"- %s" $PREVIOUS_TAG..HEAD)
         else
           echo "Generating changelog for first release"
-          CHANGELOG="First release of LibFrankaPy"
+          CHANGELOG="First release of libfrankapy"
         fi
 
         # Save to file
@@ -237,7 +237,7 @@ jobs:
         tag_name: ${{ github.ref_name }}
         name: Release ${{ github.ref_name }}
         body: |
-          ## 🎉 LibFrankaPy ${{ github.ref_name }}
+          ## 🎉 libfrankapy ${{ github.ref_name }}
 
           ### 📦 Installation
 
@@ -307,12 +307,12 @@ jobs:
     - name: Release success notification
       if: needs.publish-pypi.result == 'success' && needs.github-release.result == 'success'
       run: |
-        echo "🎉 LibFrankaPy ${{ github.ref_name }} released successfully!"
+        echo "🎉 libfrankapy ${{ github.ref_name }} released successfully!"
         echo "📦 PyPI: https://pypi.org/project/libfrankapy/${{ env.VERSION }}/"
         echo "🏷️ GitHub: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}"
 
     - name: Release failure notification
       if: needs.publish-pypi.result == 'failure' || needs.github-release.result == 'failure'
       run: |
-        echo "❌ LibFrankaPy ${{ github.ref_name }} release failed!"
+        echo "❌ libfrankapy ${{ github.ref_name }} release failed!"
         echo "Please check the workflow logs for detailed information."

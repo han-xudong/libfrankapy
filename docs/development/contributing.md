@@ -1,6 +1,6 @@
-# Contributing to LibFrankaPy
+# Contributing to libfrankapy
 
-We welcome contributions to LibFrankaPy! This guide will help you get started.
+We welcome contributions to libfrankapy! This guide will help you get started.
 
 ## Development Setup
 
@@ -704,4 +704,4 @@ We recognize contributors through:
 - Community highlights
 - Maintainer nominations
 
-Thank you for contributing to LibFrankaPy!
+Thank you for contributing to libfrankapy!
