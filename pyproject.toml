@@ -215,3 +215,8 @@ known-first-party = ["libfrankapy"]
 
 [tool.ruff.pyupgrade]
 target-version = "py38"
+
+# Wheel configuration
+[tool.bdist_wheel]
+universal = false
+plat-name = "manylinux1_x86_64"

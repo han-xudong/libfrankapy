@@ -43,12 +43,12 @@ export default {
     },
     
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/iamlab-cmu/libfrankapy' }
+      { icon: 'github', link: 'https://github.com/han-xudong/libfrankapy' }
     ],
     
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2024 IAM Lab, Carnegie Mellon University'
+      message: 'Released under the Apache License 2.0.',
+      copyright: 'Copyright © 2025 Design & Learning Research Group'
     },
     
     search: {
@@ -56,7 +56,7 @@ export default {
     },
     
     editLink: {
-      pattern: 'https://github.com/iamlab-cmu/libfrankapy/edit/main/docs/:path',
+      pattern: 'https://github.com/han-xudong/libfrankapy/edit/main/docs/:path',
       text: 'Edit this page on GitHub'
     }
   }
