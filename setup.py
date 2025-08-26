@@ -297,7 +297,6 @@ def create_extension():
     # Linker flags
     extra_link_args = [
         "-Wl,--as-needed",
-        "-Wl,--no-undefined",
     ]
 
     # Create extension
