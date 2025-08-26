@@ -120,7 +120,7 @@ ensure_newline_before_comments = true
 
 # MyPy configuration
 [tool.mypy]
-python_version = "3.8"
+python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -139,6 +139,7 @@ module = [
     "libfrankapy._libfrankapy_core",
     "franka.*",
     "pybind11.*",
+    "numpy.*",
 ]
 ignore_missing_imports = true
 

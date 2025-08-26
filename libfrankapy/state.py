@@ -25,7 +25,7 @@ class JointState:
     efforts: List[float]  # 7 joint torques in Nm
     timestamp: float = 0.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate joint state data after initialization."""
         if len(self.positions) != 7:
             raise ValueError(f"Expected 7 joint positions, got {len(self.positions)}")
@@ -52,7 +52,7 @@ class CartesianPose:
     orientation: List[float]  # [qx, qy, qz, qw] quaternion
     timestamp: float = 0.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate Cartesian pose data after initialization."""
         if len(self.position) != 3:
             raise ValueError(f"Expected 3 position values, got {len(self.position)}")
@@ -114,7 +114,7 @@ class ForceTorque:
     torque: List[float]  # [tx, ty, tz] in Nm
     timestamp: float = 0.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate force/torque data after initialization."""
         if len(self.force) != 3:
             raise ValueError(f"Expected 3 force values, got {len(self.force)}")
@@ -145,7 +145,7 @@ class RobotState:
     control_frequency: float = 1000.0
     timestamp: float = 0.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate robot state after initialization."""
         if self.timestamp == 0.0:
             self.timestamp = time.time()

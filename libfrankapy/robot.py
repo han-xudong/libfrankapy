@@ -5,7 +5,7 @@ Franka robots through the real-time C++ backend.
 """
 
 import threading
-from typing import Callable, List, Optional, Union
+from typing import Any, Callable, List, Optional, Union
 
 import numpy as np
 
@@ -29,7 +29,7 @@ try:
     from ._libfrankapy_core import RealtimeController, SharedMemoryReader
 except ImportError:
     # Fallback for development/testing
-    class RealtimeController:
+    class _FallbackRealtimeController:
         """Fallback implementation of RealtimeController for development/testing.
 
         This class provides a mock implementation when the C++ extension
@@ -101,7 +101,7 @@ except ImportError:
             """
             return np.zeros(7)
 
-        def send_joint_position_command(self, *args, **kwargs) -> bool:
+        def send_joint_position_command(self, *args: Any, **kwargs: Any) -> bool:
             """Send joint position command.
 
             Returns:
@@ -109,7 +109,7 @@ except ImportError:
             """
             return True
 
-    class SharedMemoryReader:
+    class _FallbackSharedMemoryReader:
         """Fallback implementation of SharedMemoryReader for development/testing.
 
         This class provides a mock implementation for reading robot state
@@ -173,6 +173,10 @@ class FrankaRobot:
         try:
             self._controller = RealtimeController(robot_ip)
             self._state_reader = SharedMemoryReader()
+        except NameError:
+            # Use fallback classes if C++ extension not available
+            self._controller = _FallbackRealtimeController(robot_ip)
+            self._state_reader = _FallbackSharedMemoryReader()
         except Exception as e:
             raise ConnectionError(f"Failed to initialize robot controller: {e}")
 
@@ -255,6 +259,9 @@ class FrankaRobot:
         if self._control_running:
             return True
 
+        if not self._controller:
+            raise StateError("Controller not initialized")
+            
         try:
             success = self._controller.start_control()
             if success:
@@ -316,6 +323,9 @@ class FrankaRobot:
             StateError: If robot is not connected or state is invalid
         """
         self._ensure_connected()
+        
+        if not self._controller:
+            raise StateError("Controller not initialized")
 
         try:
             positions = self._controller.get_joint_positions()
@@ -342,6 +352,9 @@ class FrankaRobot:
             StateError: If robot is not connected or state is invalid
         """
         self._ensure_connected()
+        
+        if not self._controller:
+            raise StateError("Controller not initialized")
 
         try:
             position = self._controller.get_cartesian_position()
@@ -373,6 +386,8 @@ class FrankaRobot:
             cartesian_pose = self.get_cartesian_pose()
 
             # Get additional state information
+            if not self._controller:
+                raise StateError("Controller not initialized")
             external_wrench_array = self._controller.get_external_wrench()
             external_wrench = ForceTorque(
                 force=external_wrench_array[:3].tolist(),
@@ -415,6 +430,9 @@ class FrankaRobot:
         """
         self._ensure_connected()
 
+        if not self._controller:
+            raise StateError("Controller not initialized")
+            
         try:
             torques = self._controller.get_joint_torques()
             return torques.tolist()
@@ -573,6 +591,9 @@ class FrankaRobot:
         if self.has_error():
             raise StateError(f"Robot has error (code: {self.get_error_code()})")
 
+        if not self._controller:
+            raise StateError("Controller not initialized")
+            
         try:
             # Send joint position command
             positions_array: np.ndarray = np.array(joint_positions, dtype=np.float64)
@@ -654,6 +675,9 @@ class FrankaRobot:
         if self.has_error():
             raise StateError(f"Robot has error (code: {self.get_error_code()})")
 
+        if not self._controller:
+            raise StateError("Controller not initialized")
+            
         try:
             # Send Cartesian position command
             position_array: np.ndarray = np.array(position, dtype=np.float64)
@@ -685,7 +709,7 @@ class FrankaRobot:
             raise ControlError(f"Cartesian motion failed: {e}")
 
     def execute_trajectory(
-        self, trajectory: Trajectory, callback: Optional[Callable] = None
+        self, trajectory: Trajectory, callback: Optional[Callable[[int, Any], None]] = None
     ) -> bool:
         """Execute a predefined trajectory.
 

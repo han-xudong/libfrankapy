@@ -57,7 +57,7 @@ class SafetyLimits:
     max_torque: List[float] = field(default_factory=lambda: [25.0, 25.0, 25.0])
     collision_threshold: float = 20.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate safety limits after initialization."""
         if len(self.max_joint_velocity) != 7:
             raise ValueError("max_joint_velocity must have 7 values")
@@ -93,7 +93,7 @@ class RealtimeConfig:
     enable_logging: bool = False
     log_frequency: int = 100  # Hz
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate real-time configuration."""
         if self.control_frequency <= 0:
             raise ValueError("control_frequency must be positive")
@@ -121,7 +121,7 @@ class TrajectoryPoint:
     accelerations: Optional[List[float]] = None
     time_from_start: float = 0.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate trajectory point."""
         if len(self.positions) not in [7, 6]:  # 7 for joints, 6 for Cartesian
             raise ValueError("positions must have 7 (joints) or 6 (Cartesian) values")
@@ -153,7 +153,7 @@ class Trajectory:
     speed_factor: float = 1.0
     acceleration_factor: float = 1.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate trajectory."""
         if not self.points:
             raise ValueError("Trajectory must have at least one point")
@@ -210,7 +210,7 @@ class MotionCommand:
     motion_type: MotionType = MotionType.JOINT_INTERPOLATED
     timeout: float = 30.0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate motion command."""
         if len(self.target_positions) not in [7, 6]:
             raise ValueError(
