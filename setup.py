@@ -11,9 +11,8 @@ import platform
 from pathlib import Path
 
 from pybind11.setup_helpers import Pybind11Extension, build_ext
-from pybind11 import get_cmake_dir
 import pybind11
-from setuptools import setup, Extension, find_packages
+from setuptools import setup, find_packages
 
 # Package information
 PACKAGE_NAME = "libfrankapy"
@@ -31,6 +30,7 @@ long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 if platform.system() != "Linux":
     raise RuntimeError("LibFrankaPy only supports Linux with PREEMPT_RT kernel")
 
+
 # Check for required system libraries
 def check_library(lib_name, pkg_config_name=None):
     """Check if a system library is available."""
@@ -44,13 +44,26 @@ def check_library(lib_name, pkg_config_name=None):
             return True
         except (subprocess.CalledProcessError, FileNotFoundError):
             pass
-    
-    # Try to find the library in standard locations
-    for lib_dir in ["/usr/lib", "/usr/local/lib", "/opt/lib"]:
+
+    # Get additional search paths from CMAKE_PREFIX_PATH
+    search_paths = ["/usr/lib", "/usr/local/lib", "/opt/lib", "/opt/libfranka/lib"]
+
+    # Add paths from CMAKE_PREFIX_PATH environment variable
+    cmake_prefix_path = os.environ.get("CMAKE_PREFIX_PATH", "")
+    if cmake_prefix_path:
+        for path in cmake_prefix_path.split(":"):
+            if path.strip():
+                lib_path = os.path.join(path.strip(), "lib")
+                if lib_path not in search_paths:
+                    search_paths.append(lib_path)
+
+    # Try to find the library in all search locations
+    for lib_dir in search_paths:
         if os.path.exists(f"{lib_dir}/lib{lib_name}.so"):
             return True
-    
+
     return False
+
 
 # Check for required dependencies
 required_libs = [
@@ -72,6 +85,7 @@ if missing_libs:
     print("See README.md for installation instructions.")
     sys.exit(1)
 
+
 # Get include directories
 def get_include_dirs():
     """Get include directories for compilation."""
@@ -80,8 +94,19 @@ def get_include_dirs():
         pybind11.get_include(),
         # Local source directory
         "src",
+        # libfranka include directory
+        "/opt/libfranka/include",
     ]
-    
+
+    # Add paths from CMAKE_PREFIX_PATH environment variable
+    cmake_prefix_path = os.environ.get("CMAKE_PREFIX_PATH", "")
+    if cmake_prefix_path:
+        for path in cmake_prefix_path.split(":"):
+            if path.strip():
+                inc_path = os.path.join(path.strip(), "include")
+                if os.path.exists(inc_path) and inc_path not in include_dirs:
+                    include_dirs.append(inc_path)
+
     # Try to get Eigen3 include directory
     try:
         eigen_include = subprocess.check_output(
@@ -96,21 +121,32 @@ def get_include_dirs():
             if os.path.exists(path):
                 include_dirs.append(path)
                 break
-    
+
     return include_dirs
+
 
 # Get library directories and libraries
 def get_libraries():
     """Get libraries to link against."""
     libraries = ["franka", "PocoFoundation", "pthread", "rt"]
-    library_dirs = ["/usr/lib", "/usr/local/lib"]
-    
+    library_dirs = ["/usr/lib", "/usr/local/lib", "/opt/libfranka/lib"]
+
+    # Add paths from CMAKE_PREFIX_PATH environment variable
+    cmake_prefix_path = os.environ.get("CMAKE_PREFIX_PATH", "")
+    if cmake_prefix_path:
+        for path in cmake_prefix_path.split(":"):
+            if path.strip():
+                lib_path = os.path.join(path.strip(), "lib")
+                if lib_path not in library_dirs:
+                    library_dirs.append(lib_path)
+
     return libraries, library_dirs
+
 
 # Define the extension module
 def create_extension():
     """Create the pybind11 extension."""
-    
+
     # Source files
     sources = [
         "src/python_bindings.cpp",
@@ -118,11 +154,11 @@ def create_extension():
         "src/realtime_controller.cpp",
         "src/motion_generators.cpp",
     ]
-    
+
     # Get compilation parameters
     include_dirs = get_include_dirs()
     libraries, library_dirs = get_libraries()
-    
+
     # Compiler flags
     extra_compile_args = [
         "-std=c++17",
@@ -135,13 +171,13 @@ def create_extension():
         "-DEIGEN_MPL2_ONLY",
         "-D_GNU_SOURCE",
     ]
-    
+
     # Linker flags
     extra_link_args = [
         "-Wl,--as-needed",
         "-Wl,--no-undefined",
     ]
-    
+
     # Create extension
     ext = Pybind11Extension(
         "libfrankapy._libfrankapy_core",
@@ -153,16 +189,17 @@ def create_extension():
         extra_link_args=extra_link_args,
         cxx_std=17,
     )
-    
+
     return ext
+
 
 # Custom build command
 class CustomBuildExt(build_ext):
     """Custom build extension command."""
-    
+
     def build_extensions(self):
         """Build the extensions with custom settings."""
-        
+
         # Check compiler
         compiler_type = self.compiler.compiler_type
         if compiler_type == "unix":
@@ -172,15 +209,16 @@ class CustomBuildExt(build_ext):
                     "-march=native",
                     "-mtune=native",
                 ])
-        
+
         # Call parent build
         super().build_extensions()
-    
+
     def run(self):
         """Run the build process."""
         print("Building LibFrankaPy C++ extension...")
         super().run()
         print("Build completed successfully!")
+
 
 # Setup configuration
 setup(
@@ -192,24 +230,24 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=URL,
-    
+
     # Package configuration
     packages=find_packages(),
     package_data={
         "libfrankapy": ["py.typed"],
     },
-    
+
     # Extension modules
     ext_modules=[create_extension()],
     cmdclass={"build_ext": CustomBuildExt},
-    
+
     # Dependencies
     python_requires=">=3.8",
     install_requires=[
         "numpy>=1.19.0",
         "pybind11>=2.10.0",
     ],
-    
+
     extras_require={
         "dev": [
             "pytest>=6.0",
@@ -225,7 +263,7 @@ setup(
             "scipy",
         ],
     },
-    
+
     # Metadata
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -243,20 +281,20 @@ setup(
         "Topic :: Scientific/Engineering :: Physics",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    
+
     keywords="robotics franka robot-control real-time panda",
-    
+
     # Entry points
     entry_points={
         "console_scripts": [
             "libfrankapy-info=libfrankapy.utils:print_system_info",
         ],
     },
-    
+
     # Include additional files
     include_package_data=True,
     zip_safe=False,
-    
+
     # Project URLs
     project_urls={
         "Bug Reports": f"{URL}/issues",
