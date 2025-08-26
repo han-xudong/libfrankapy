@@ -204,6 +204,9 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [build, test]
     environment: release
+    permissions:
+      id-token: write  # Required for Trusted Publishing
+      contents: read   # Required to read repository contents
 
     steps:
     - name: Extract version from tag
@@ -220,8 +223,7 @@ jobs:
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        attestations: true  # Enable attestations for Trusted Publishing
 
   # Create GitHub Release
   github-release:
