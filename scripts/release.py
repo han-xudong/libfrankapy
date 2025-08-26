@@ -27,18 +27,20 @@ class ReleaseManager:
         
     def get_current_version(self) -> str:
         """Get current version number."""
+        if not self.version_file.exists():
+            raise FileNotFoundError(f"Version file not found: {self.version_file}")
         content = self.version_file.read_text(encoding="utf-8")
-        match = re.search(r'__version__\s*=\s*["\']([^"\']*)["\'']', content)
+        match = re.search(r'__version__\s*=\s*(["\'])([^"\']*)\1', content)
         if not match:
             raise ValueError("Cannot find version number")
-        return match.group(1)
+        return match.group(2)
     
     def update_version(self, new_version: str) -> None:
         """Update version number."""
         content = self.version_file.read_text(encoding="utf-8")
         new_content = re.sub(
-            r'(__version__\s*=\s*["\'])([^"\']*)(["\'])',
-            f'\\g<1>{new_version}\\g<3>',
+            r'(__version__\s*=\s*)(["\'])([^"\']*)\2',
+            f'\\g<1>\\g<2>{new_version}\\g<2>',
             content
         )
         self.version_file.write_text(new_content, encoding="utf-8")

@@ -1,6 +1,6 @@
 # LibFrankaPy
 
-[![CI](https://github.com/yourusername/libfrankapy/workflows/CI/badge.svg)](https://github.com/yourusername/libfrankapy/actions)
+[![CI](https://github.com/han-xudong/libfrankapy/workflows/CI/badge.svg)](https://github.com/han-xudong/libfrankapy/actions)
 [![PyPI version](https://badge.fury.io/py/libfrankapy.svg)](https://badge.fury.io/py/libfrankapy)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -316,7 +316,7 @@ We welcome community contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/libfrankapy.git
+git clone https://github.com/han-xudong/libfrankapy.git
 cd libfrankapy
 
 # Create development environment
@@ -343,8 +343,8 @@ This project is licensed under the [Apache License 2.0](LICENSE).
 ## 📞 Support
 
 - 📖 [Documentation](https://libfrankapy.readthedocs.io/)
-- 🐛 [Issue Tracker](https://github.com/yourusername/libfrankapy/issues)
-- 💬 [Discussions](https://github.com/yourusername/libfrankapy/discussions)
+- 🐛 [Issue Tracker](https://github.com/han-xudong/libfrankapy/issues)
+- 💬 [Discussions](https://github.com/han-xudong/libfrankapy/discussions)
 - 📧 [Email Support](mailto:support@libfrankapy.org)
 
 ## 🔗 Related Links
@@ -356,147 +356,3 @@ This project is licensed under the [Apache License 2.0](LICENSE).
 ---
 
 **Note**: When using this library to control robotic arms, please ensure you follow all safety protocols and test in a controlled environment.
-
-Python bindings for libfranka with real-time C++ control loop and high-level Python interface.
-
-## Overview
-
-LibFrankaPy provides Python bindings for the libfranka C++ library, enabling high-level Python control of Franka robots while maintaining real-time performance through a hybrid architecture:
-
-- **C++ Real-time Layer**: Handles real-time control loops, ensuring deterministic performance
-- **Python High-level Interface**: Provides easy-to-use APIs for robot control, trajectory planning, and state monitoring
-- **Shared Memory Communication**: Efficient data exchange between Python and C++ layers
-
-## Architecture
-
-```mermaid
-graph TD
-    A[Python Application] --> B[LibFrankaPy Python API]
-    B --> C[Pybind11 Binding Layer]
-    C --> D[C++ Control Manager]
-    D --> E[Real-time Control Thread]
-    E <--> F[Shared Memory]
-    E --> G[LibFranka C++ Library]
-    G --> H[Franka Robot Hardware]
-    
-    style A fill:#e3f2fd
-    style B fill:#f3e5f5
-    style C fill:#fff8e1
-    style D fill:#e8f5e8
-    style E fill:#ffebee
-    style F fill:#f1f8e9
-    style G fill:#e0f2f1
-    style H fill:#fce4ec
-```
-
-## Features
-
-- **Real-time Performance**: C++ control loops maintain real-time constraints
-- **Python Ease-of-use**: Intuitive Python APIs for high-level control
-- **Joint and Cartesian Control**: Support for both joint space and Cartesian space motion
-- **State Monitoring**: Real-time access to robot state, joint positions, forces, and poses
-- **Trajectory Execution**: Advanced trajectory planning and execution capabilities
-- **Safety Features**: Emergency stop and safety limit enforcement
-
-## Requirements
-
-- Ubuntu 22.04+ with PREEMPT_RT kernel
-- Python 3.8+
-- libfranka 0.15+
-- CMake 3.16+
-- pybind11 2.10+
-
-## Installation
-
-### Dependencies
-
-```bash
-# Install system dependencies
-sudo apt-get update
-sudo apt-get install -y build-essential cmake git libpoco-dev libeigen3-dev libfmt-dev
-
-# Install libfranka (follow official installation guide)
-# https://github.com/frankarobotics/libfranka
-
-# Install Python dependencies
-pip install numpy pybind11
-```
-
-### Build and Install
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd libfrankapy
-
-# Build the project
-mkdir build
-cd build
-cmake ..
-make -j$(nproc)
-
-# Install Python package
-cd ..
-pip install -e .
-```
-
-## Quick Start
-
-```python
-import libfrankapy as fp
-import numpy as np
-
-# Connect to robot
-robot = fp.FrankaRobot("192.168.1.100")
-robot.connect()
-
-# Get current state
-state = robot.get_joint_state()
-print(f"Current joint positions: {state.positions}")
-
-# Move to joint configuration
-target_joints = [0.0, -0.785, 0.0, -2.356, 0.0, 1.571, 0.785]
-robot.move_to_joint(target_joints, speed_factor=0.1)
-
-# Move in Cartesian space
-target_pose = [0.5, 0.0, 0.5, 1.0, 0.0, 0.0, 0.0]  # [x,y,z,qw,qx,qy,qz]
-robot.move_to_pose(target_pose, speed_factor=0.1)
-
-# Disconnect
-robot.disconnect()
-```
-
-## API Reference
-
-### Core Classes
-
-- `FrankaRobot`: Main robot control interface
-- `JointState`: Joint position, velocity, and torque data
-- `CartesianPose`: Cartesian position and orientation
-- `RealtimeConfig`: Real-time control configuration
-
-### Control Methods
-
-- `move_to_joint()`: Move to target joint configuration
-- `move_to_pose()`: Move to target Cartesian pose
-- `execute_trajectory()`: Execute predefined trajectory
-- `emergency_stop()`: Immediate safety stop
-
-### State Queries
-
-- `get_joint_state()`: Get current joint state
-- `get_cartesian_pose()`: Get current end-effector pose
-- `get_robot_state()`: Get complete robot state
-- `get_joint_torques()`: Get current joint torques
-
-## License
-
-This project is licensed under the Apache 2.0 License - see the LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Please read the contributing guidelines before submitting pull requests.
-
-## Support
-
-For questions and support, please open an issue on the GitHub repository.
