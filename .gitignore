@@ -279,3 +279,7 @@ docs/.vitepress/dist/
 # Build outputs
 dist/
 out/
+
+# Release and version management scripts (use GitHub Actions instead)
+scripts/release.py
+scripts/update_version.py

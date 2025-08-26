@@ -84,6 +84,20 @@ jobs:
 
         echo "VERSION=$VERSION" >> $GITHUB_ENV
 
+    - name: Update version in project files
+      run: |
+        # Update version in pyproject.toml
+        sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
+        
+        # Update version in __init__.py
+        sed -i "s/__version__ = \".*\"/__version__ = \"$VERSION\"/" libfrankapy/__init__.py
+        
+        # Verify changes
+        echo "Updated pyproject.toml:"
+        grep "^version = " pyproject.toml
+        echo "Updated __init__.py:"
+        grep "__version__ = " libfrankapy/__init__.py
+
     - name: Build distribution packages
       run: |
         export CMAKE_PREFIX_PATH="/opt/libfranka:/opt/openrobots/lib/cmake:$CMAKE_PREFIX_PATH"
@@ -117,6 +131,19 @@ jobs:
       with:
         python-version: ${{ env.PYTHON_VERSION }}
         cache: 'pip'
+
+    - name: Extract version from tag
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+    - name: Update version in project files
+      run: |
+        # Update version in pyproject.toml
+        sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
+        
+        # Update version in __init__.py
+        sed -i "s/__version__ = \".*\"/__version__ = \"$VERSION\"/" libfrankapy/__init__.py
 
     - name: Install system dependencies
       run: |
@@ -202,6 +229,11 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+
+    - name: Extract version from tag
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
 
     - name: Download build artifacts
       uses: actions/download-artifact@v4
@@ -304,6 +336,11 @@ jobs:
     if: always()
 
     steps:
+    - name: Extract version from tag
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+
     - name: Release success notification
       if: needs.publish-pypi.result == 'success' && needs.github-release.result == 'success'
       run: |
