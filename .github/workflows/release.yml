@@ -101,7 +101,10 @@ jobs:
     - name: Build distribution packages
       run: |
         export CMAKE_PREFIX_PATH="/opt/libfranka:/opt/openrobots/lib/cmake:$CMAKE_PREFIX_PATH"
-        python -m build
+        # Build source distribution
+        python setup.py sdist
+        # Build wheel with explicit platform tag
+        python setup.py bdist_wheel --plat-name manylinux1_x86_64
 
     - name: List distribution packages
       run: |
