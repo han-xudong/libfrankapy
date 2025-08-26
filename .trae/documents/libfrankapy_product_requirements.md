@@ -106,7 +106,7 @@ graph TD
     E --> F[Real-time Control Loop]
     F --> G[LibFranka Library]
     G --> H[Franka Robotic Arm]
-    
+
     H --> G
     G --> F
     F --> E
@@ -151,25 +151,25 @@ graph TB
         B[LibFrankaPy API]
         C[Data Type Definitions]
     end
-    
+
     subgraph "Binding Layer"
         D[Pybind11 Binding]
         E[Type Converters]
         F[Exception Handlers]
     end
-    
+
     subgraph "C++ Layer"
         G[Real-time Controller]
         H[State Manager]
         I[Communication Interface]
     end
-    
+
     subgraph "System Layer"
         J[Shared Memory]
         K[LibFranka Library]
         L[Franka Robotic Arm]
     end
-    
+
     A --> B
     B --> C
     B --> D

@@ -1,9 +1,6 @@
 # LibFrankaPy
 
-[![CI](https://github.com/han-xudong/libfrankapy/workflows/CI/badge.svg)](https://github.com/han-xudong/libfrankapy/actions)
-[![PyPI version](https://badge.fury.io/py/libfrankapy.svg)](https://badge.fury.io/py/libfrankapy)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CI](https://github.com/han-xudong/libfrankapy/workflows/CI/badge.svg)](https://github.com/han-xudong/libfrankapy/actions) [![PyPI version](https://badge.fury.io/py/libfrankapy.svg)](https://badge.fury.io/py/libfrankapy) [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 LibFrankaPy is a Python binding project for the [libfranka](https://github.com/frankarobotics/libfranka) C++ library, designed to provide high-level Python interfaces for Franka robotic arms while maintaining the performance advantages of low-level C++ real-time control.
 
@@ -30,7 +27,7 @@ graph TD
     D --> F[Real-time Control Thread]
     F --> G[LibFranka C++ Library]
     G --> H[Franka Robotic Arm Hardware]
-    
+
     style A fill:#e1f5fe
     style B fill:#f3e5f5
     style C fill:#fff3e0
@@ -149,15 +146,15 @@ try:
     state = robot.get_robot_state()
     print(f"Current joint positions: {state.joint_state.positions}")
     print(f"Current end-effector pose: {state.cartesian_pose.position}")
-    
+
     # Joint space motion
     target_joints = [0.0, -0.785, 0.0, -2.356, 0.0, 1.571, 0.785]
     robot.move_to_joint(target_joints, speed_factor=0.1)
-    
+
     # Cartesian space motion
     target_pose = [0.5, 0.0, 0.5, 0.0, 0.0, 0.0, 1.0]  # [x, y, z, qx, qy, qz, qw]
     robot.move_to_pose(target_pose, speed_factor=0.1)
-    
+
 finally:
     # Disconnect
     robot.disconnect()
@@ -199,15 +196,15 @@ robot.start_control()
 try:
     for i in range(100):  # Monitor for 10 seconds
         state = robot.get_robot_state()
-        
+
         print(f"Timestamp: {state.timestamp:.3f}")
         print(f"Joint positions: {[f'{q:.3f}' for q in state.joint_state.positions]}")
         print(f"End-effector position: {[f'{p:.3f}' for p in state.cartesian_pose.position]}")
         print(f"External forces: {[f'{f:.3f}' for f in state.external_wrench[:3]]}")
         print("-" * 50)
-        
+
         time.sleep(0.1)
-        
+
 finally:
     robot.disconnect()
 ```
@@ -228,7 +225,7 @@ class FrankaRobot:
     def is_connected() -> bool
     def start_control() -> None
     def stop_control() -> None
-    def move_to_joint(self, joint_positions: List[float], 
+    def move_to_joint(self, joint_positions: List[float],
                       speed_factor: float = 0.1,
                       acceleration_factor: float = 0.1) -> bool
     def move_to_pose(self, target_pose: List[float],

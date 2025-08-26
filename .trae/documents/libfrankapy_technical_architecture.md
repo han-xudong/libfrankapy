@@ -11,22 +11,22 @@ graph TD
     D --> F[Real-time Control Thread]
     F --> G[LibFranka C++ Library]
     G --> H[Franka Robotic Arm Hardware]
-    
+
     subgraph "Python Layer"
         A
         B
     end
-    
+
     subgraph "Binding Layer"
         C
     end
-    
+
     subgraph "C++ Real-time Layer"
         D
         E
         F
     end
-    
+
     subgraph "Hardware Layer"
         G
         H
@@ -72,7 +72,7 @@ class FrankaRobot:
 **Motion Control Interface**
 
 ```python
-def move_to_joint(self, joint_positions: List[float], 
+def move_to_joint(self, joint_positions: List[float],
                   speed_factor: float = 0.1,
                   acceleration_factor: float = 0.1) -> bool
 
@@ -87,7 +87,7 @@ def execute_trajectory(self, trajectory: Trajectory,
 
 ```python
 def get_joint_state() -> JointState
-def get_cartesian_pose() -> CartesianPose  
+def get_cartesian_pose() -> CartesianPose
 def get_robot_state() -> RobotState
 def get_joint_torques() -> List[float]
 ```
@@ -125,20 +125,20 @@ graph TD
     D --> E[LibFranka Library Layer]
     E --> F[Hardware Abstraction Layer]
     F --> G[(Franka Robotic Arm)]
-    
+
     subgraph "Application Layer"
         A
     end
-    
+
     subgraph "Binding Layer"
         B
     end
-    
+
     subgraph "Control Layer"
         C
         D
     end
-    
+
     subgraph "Hardware Layer"
         E
         F
@@ -157,21 +157,21 @@ erDiagram
     ROBOT_STATE ||--o{ FORCE_TORQUE : contains
     CONTROL_COMMAND ||--o{ JOINT_COMMAND : contains
     CONTROL_COMMAND ||--o{ CARTESIAN_COMMAND : contains
-    
+
     ROBOT_STATE {
         uint64 timestamp
         int robot_id
         string status
         float control_frequency
     }
-    
+
     JOINT_STATE {
         float q1_q7[7]
-        float dq1_dq7[7] 
+        float dq1_dq7[7]
         float tau1_tau7[7]
         uint64 timestamp
     }
-    
+
     CARTESIAN_STATE {
         float position[3]
         float orientation[4]
@@ -179,27 +179,27 @@ erDiagram
         float angular_velocity[3]
         uint64 timestamp
     }
-    
+
     FORCE_TORQUE {
         float force[3]
         float torque[3]
         uint64 timestamp
     }
-    
+
     CONTROL_COMMAND {
         int command_id
         string command_type
         float duration
         uint64 timestamp
     }
-    
+
     JOINT_COMMAND {
         float target_positions[7]
         float target_velocities[7]
         float speed_factor
         float acceleration_factor
     }
-    
+
     CARTESIAN_COMMAND {
         float target_position[3]
         float target_orientation[4]
@@ -217,19 +217,19 @@ erDiagram
 struct RealtimeState {
     std::atomic<uint64_t> timestamp;
     std::atomic<bool> is_valid;
-    
+
     // Joint state
     std::array<std::atomic<double>, 7> joint_positions;
-    std::array<std::atomic<double>, 7> joint_velocities; 
+    std::array<std::atomic<double>, 7> joint_velocities;
     std::array<std::atomic<double>, 7> joint_torques;
-    
+
     // Cartesian state
     std::array<std::atomic<double>, 3> cartesian_position;
     std::array<std::atomic<double>, 4> cartesian_orientation;
-    
+
     // Force/torque
     std::array<std::atomic<double>, 6> external_wrench;
-    
+
     // Control state
     std::atomic<int> control_mode;
     std::atomic<bool> emergency_stop;
@@ -240,13 +240,13 @@ struct ControlCommand {
     std::atomic<uint64_t> command_id;
     std::atomic<int> command_type;
     std::atomic<bool> new_command;
-    
+
     // Joint control commands
     std::array<std::atomic<double>, 7> target_joint_positions;
     std::atomic<double> joint_speed_factor;
     std::atomic<double> joint_acceleration_factor;
-    
-    // Cartesian control commands  
+
+    // Cartesian control commands
     std::array<std::atomic<double>, 3> target_cartesian_position;
     std::array<std::atomic<double>, 4> target_cartesian_orientation;
     std::atomic<double> cartesian_speed_factor;
@@ -259,8 +259,8 @@ struct ControlCommand {
 // Create shared memory segment
 int shm_fd = shm_open("/libfrankapy_state", O_CREAT | O_RDWR, 0666);
 ftruncate(shm_fd, sizeof(RealtimeState));
-RealtimeState* shared_state = (RealtimeState*)mmap(0, sizeof(RealtimeState), 
-                                                   PROT_READ | PROT_WRITE, 
+RealtimeState* shared_state = (RealtimeState*)mmap(0, sizeof(RealtimeState),
+                                                   PROT_READ | PROT_WRITE,
                                                    MAP_SHARED, shm_fd, 0);
 
 // Initialize atomic variables
@@ -274,4 +274,3 @@ struct sched_param param;
 param.sched_priority = 80;
 pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
 ```
-

@@ -112,20 +112,20 @@ We follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide:
 # Good example
 class FrankaRobot:
     """Franka robot control class.
-    
+
     Args:
         robot_ip: Robot IP address
         realtime_config: Real-time configuration parameters
     """
-    
+
     def __init__(self, robot_ip: str, realtime_config: Optional[RealtimeConfig] = None) -> None:
         self._robot_ip = robot_ip
         self._config = realtime_config or RealtimeConfig()
         self._is_connected = False
-    
+
     def connect(self) -> bool:
         """Connect to robot.
-        
+
         Returns:
             Whether connection was successful
         """
@@ -155,17 +155,17 @@ We follow the [Google C++ Style Guide](https://google.github.io/styleguide/cppgu
 class RealtimeController {
  public:
   explicit RealtimeController(const RealtimeConfig& config);
-  
+
   bool StartControl();
   void StopControl();
-  
+
   RobotState GetCurrentState() const;
-  
+
  private:
   std::unique_ptr<franka::Robot> robot_;
   std::atomic<bool> is_running_{false};
   RealtimeConfig config_;
-  
+
   void ControlLoop();
 };
 ```
@@ -192,18 +192,18 @@ from libfrankapy.exceptions import ConnectionError
 
 class TestFrankaRobot:
     """Tests for FrankaRobot class."""
-    
+
     def test_init_with_valid_ip(self):
         """Test initialization with valid IP."""
         robot = FrankaRobot("192.168.1.100")
         assert robot.robot_ip == "192.168.1.100"
         assert not robot.is_connected()
-    
+
     def test_init_with_invalid_ip(self):
         """Test initialization with invalid IP."""
         with pytest.raises(ValueError):
             FrankaRobot("invalid-ip")
-    
+
     @pytest.mark.integration
     def test_connect_to_real_robot(self):
         """Integration test: connect to real robot."""
@@ -240,24 +240,24 @@ pytest -m "not integration"
 We use Google-style docstrings:
 
 ```python
-def move_to_joint(self, joint_positions: List[float], 
+def move_to_joint(self, joint_positions: List[float],
                   speed_factor: float = 0.1,
                   acceleration_factor: float = 0.1) -> bool:
     """Move robot to specified joint positions.
-    
+
     Args:
         joint_positions: Target joint position list containing 7 joint angles (radians)
         speed_factor: Speed factor, range [0.01, 1.0], default 0.1
         acceleration_factor: Acceleration factor, range [0.01, 1.0], default 0.1
-    
+
     Returns:
         Whether motion was executed successfully
-    
+
     Raises:
         ValueError: When joint position count is incorrect
         ConnectionError: When robot is not connected
         SafetyError: When target position exceeds safety limits
-    
+
     Example:
         >>> robot = FrankaRobot("192.168.1.100")
         >>> robot.connect()
