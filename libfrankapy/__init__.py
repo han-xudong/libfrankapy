@@ -15,6 +15,13 @@ from .exceptions import (
 from .robot import FrankaRobot
 from .state import CartesianPose, JointState, RobotState
 
+# Import C++ classes with fallback
+try:
+    from ._libfrankapy_core import RealtimeController, SharedMemoryReader
+except ImportError:
+    from .robot import _FallbackRealtimeController as RealtimeController
+    from .robot import _FallbackSharedMemoryReader as SharedMemoryReader
+
 __version__ = "0.1.0"
 __author__ = "libfrankapy Team"
 __email__ = "support@libfrankapy.org"
@@ -23,6 +30,8 @@ __description__ = "Python bindings for libfranka with real-time control"
 __all__ = [
     # Core classes
     "FrankaRobot",
+    "RealtimeController",
+    "SharedMemoryReader",
     # State classes
     "JointState",
     "CartesianPose",

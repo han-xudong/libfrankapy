@@ -177,8 +177,11 @@ class FrankaRobot:
             # Use fallback classes if C++ extension not available
             self._controller = _FallbackRealtimeController(robot_ip)
             self._state_reader = _FallbackSharedMemoryReader()
+
+
         except Exception as e:
             raise ConnectionError(f"Failed to initialize robot controller: {e}")
+
 
     def connect(self) -> bool:
         """Connect to the robot.
@@ -261,7 +264,7 @@ class FrankaRobot:
 
         if not self._controller:
             raise StateError("Controller not initialized")
-            
+
         try:
             success = self._controller.start_control()
             if success:
@@ -323,7 +326,7 @@ class FrankaRobot:
             StateError: If robot is not connected or state is invalid
         """
         self._ensure_connected()
-        
+
         if not self._controller:
             raise StateError("Controller not initialized")
 
@@ -352,7 +355,7 @@ class FrankaRobot:
             StateError: If robot is not connected or state is invalid
         """
         self._ensure_connected()
-        
+
         if not self._controller:
             raise StateError("Controller not initialized")
 
@@ -432,7 +435,7 @@ class FrankaRobot:
 
         if not self._controller:
             raise StateError("Controller not initialized")
-            
+
         try:
             torques = self._controller.get_joint_torques()
             return torques.tolist()
@@ -593,7 +596,7 @@ class FrankaRobot:
 
         if not self._controller:
             raise StateError("Controller not initialized")
-            
+
         try:
             # Send joint position command
             positions_array: np.ndarray = np.array(joint_positions, dtype=np.float64)
@@ -677,7 +680,7 @@ class FrankaRobot:
 
         if not self._controller:
             raise StateError("Controller not initialized")
-            
+
         try:
             # Send Cartesian position command
             position_array: np.ndarray = np.array(position, dtype=np.float64)
@@ -813,3 +816,11 @@ class FrankaRobot:
             self.disconnect()
         except Exception:
             pass
+
+
+# Make classes available at module level for testing
+try:
+    from ._libfrankapy_core import RealtimeController, SharedMemoryReader
+except ImportError:
+    RealtimeController = _FallbackRealtimeController
+    SharedMemoryReader = _FallbackSharedMemoryReader
