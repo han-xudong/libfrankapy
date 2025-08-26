@@ -30,45 +30,106 @@ try:
 except ImportError:
     # Fallback for development/testing
     class RealtimeController:
+        """Fallback implementation of RealtimeController for development/testing.
+
+        This class provides a mock implementation when the C++ extension
+        is not available, allowing for development and testing without
+        hardware dependencies.
+        """
+
         def __init__(self, robot_ip: str):
+            """Initialize the controller.
+
+            Args:
+                robot_ip: IP address of the robot
+            """
             self.robot_ip = robot_ip
             self._connected = False
             self._control_running = False
 
         def connect(self) -> bool:
+            """Connect to the robot.
+
+            Returns:
+                True if connection successful
+            """
             self._connected = True
             return True
 
         def disconnect(self) -> None:
+            """Disconnect from the robot."""
             self._connected = False
 
         def is_connected(self) -> bool:
+            """Check if robot is connected.
+
+            Returns:
+                True if connected
+            """
             return self._connected
 
         def start_control(self) -> bool:
+            """Start the control loop.
+
+            Returns:
+                True if control started successfully
+            """
             self._control_running = True
             return True
 
         def stop_control(self) -> None:
+            """Stop the control loop."""
             self._control_running = False
 
         def is_control_running(self) -> bool:
+            """Check if control loop is running.
+
+            Returns:
+                True if control is running
+            """
             return self._control_running
 
         def emergency_stop(self) -> None:
+            """Trigger emergency stop."""
             pass
 
         def get_joint_positions(self) -> np.ndarray:
+            """Get current joint positions.
+
+            Returns:
+                Array of joint positions
+            """
             return np.zeros(7)
 
         def send_joint_position_command(self, *args, **kwargs) -> bool:
+            """Send joint position command.
+
+            Returns:
+                True if command sent successfully
+            """
             return True
 
     class SharedMemoryReader:
+        """Fallback implementation of SharedMemoryReader for development/testing.
+
+        This class provides a mock implementation for reading robot state
+        when the C++ extension is not available.
+        """
+
         def connect(self) -> bool:
+            """Connect to shared memory.
+
+            Returns:
+                True if connection successful
+            """
             return True
 
         def get_robot_state(self) -> dict:
+            """Get current robot state.
+
+            Returns:
+                Dictionary containing robot state information
+            """
             return {}
 
 
