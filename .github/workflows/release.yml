@@ -206,6 +206,11 @@ jobs:
     environment: release
 
     steps:
+    - name: Extract version from tag
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
@@ -305,6 +310,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Extract version from tag
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
 
     - name: Setup Python
       uses: actions/setup-python@v4
