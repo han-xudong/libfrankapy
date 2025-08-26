@@ -284,4 +284,62 @@ class SharedMemoryManager {
   bool is_creator_;
 };
 
+/**
+ * @brief Utility functions for working with shared memory data
+ */
+namespace shared_memory_utils {
+
+/**
+ * @brief Copy joint positions from array to atomic array
+ */
+void set_joint_positions(std::array<std::atomic<double>, 7>& atomic_array,
+                         const std::array<double, 7>& values);
+
+/**
+ * @brief Copy joint positions from atomic array to regular array
+ */
+std::array<double, 7> get_joint_positions(
+    const std::array<std::atomic<double>, 7>& atomic_array);
+
+/**
+ * @brief Copy Cartesian position from array to atomic array
+ */
+void set_cartesian_position(std::array<std::atomic<double>, 3>& atomic_array,
+                            const std::array<double, 3>& values);
+
+/**
+ * @brief Copy Cartesian position from atomic array to regular array
+ */
+std::array<double, 3> get_cartesian_position(
+    const std::array<std::atomic<double>, 3>& atomic_array);
+
+/**
+ * @brief Copy quaternion from array to atomic array
+ */
+void set_quaternion(std::array<std::atomic<double>, 4>& atomic_array,
+                    const std::array<double, 4>& values);
+
+/**
+ * @brief Copy quaternion from atomic array to regular array
+ */
+std::array<double, 4> get_quaternion(
+    const std::array<std::atomic<double>, 4>& atomic_array);
+
+/**
+ * @brief Get current timestamp in microseconds
+ */
+uint64_t get_current_timestamp();
+
+/**
+ * @brief Update timestamp in shared memory structure
+ */
+void update_timestamp(std::atomic<uint64_t>& timestamp);
+
+/**
+ * @brief Check if timestamp is recent (within timeout)
+ */
+bool is_timestamp_recent(uint64_t timestamp, uint64_t timeout_us = 1000000);
+
+}  // namespace shared_memory_utils
+
 }  // namespace libfrankapy

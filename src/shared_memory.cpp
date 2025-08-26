@@ -14,6 +14,7 @@
 #include <cstring>
 #include <iostream>
 #include <stdexcept>
+#include <thread>
 
 namespace libfrankapy {
 
