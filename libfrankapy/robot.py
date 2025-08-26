@@ -177,11 +177,8 @@ class FrankaRobot:
             # Use fallback classes if C++ extension not available
             self._controller = _FallbackRealtimeController(robot_ip)
             self._state_reader = _FallbackSharedMemoryReader()
-
-
         except Exception as e:
             raise ConnectionError(f"Failed to initialize robot controller: {e}")
-
 
     def connect(self) -> bool:
         """Connect to the robot.

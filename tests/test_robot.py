@@ -97,21 +97,24 @@ class TestFrankaRobot:
         robot._connected = True
         robot._control_running = True
 
+        # Use safe joint positions for testing
+        safe_joint_positions = [0.0, -0.785, 0.0, -2.356, 0.0, 1.571, 0.785]
+
         # Test invalid number of joints
         with pytest.raises(ValueError):
             robot.move_to_joint([1, 2, 3])  # Only 3 joints instead of 7
 
         # Test invalid speed factor
         with pytest.raises(ValueError):
-            robot.move_to_joint([0] * 7, speed_factor=1.5)
+            robot.move_to_joint(safe_joint_positions, speed_factor=1.5)
 
         # Test invalid acceleration factor
         with pytest.raises(ValueError):
-            robot.move_to_joint([0] * 7, acceleration_factor=-0.1)
+            robot.move_to_joint(safe_joint_positions, acceleration_factor=-0.1)
 
         # Test invalid timeout
         with pytest.raises(ValueError):
-            robot.move_to_joint([0] * 7, timeout=-1)
+            robot.move_to_joint(safe_joint_positions, timeout=-1)
 
     @patch("libfrankapy.robot.RealtimeController")
     def test_move_to_pose_validation(self, mock_controller_class):
@@ -120,17 +123,20 @@ class TestFrankaRobot:
         robot._connected = True
         robot._control_running = True
 
+        # Use safe Cartesian pose for testing [x, y, z, qx, qy, qz, qw]
+        safe_pose = [0.5, 0.0, 0.5, 0.0, 0.0, 0.0, 1.0]
+
         # Test invalid pose length
         with pytest.raises(ValueError):
             robot.move_to_pose([1, 2, 3])  # Only 3 elements instead of 7
 
         # Test invalid speed factor
         with pytest.raises(ValueError):
-            robot.move_to_pose([0] * 7, speed_factor=2.0)
+            robot.move_to_pose(safe_pose, speed_factor=2.0)
 
         # Test invalid timeout
         with pytest.raises(ValueError):
-            robot.move_to_pose([0] * 7, timeout=0)
+            robot.move_to_pose(safe_pose, timeout=0)
 
     def test_context_manager(self):
         """Test robot as context manager."""
