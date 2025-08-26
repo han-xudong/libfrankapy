@@ -230,6 +230,9 @@ jobs:
     name: Create GitHub Release
     runs-on: ubuntu-22.04
     needs: [build, test]
+    permissions:
+      contents: write  # Required for creating GitHub releases
+      actions: read    # Required to read workflow artifacts
 
     steps:
     - name: Checkout code
@@ -308,6 +311,10 @@ jobs:
     name: Update documentation
     runs-on: ubuntu-22.04
     needs: [publish-pypi]
+    permissions:
+      contents: write  # Required for GitHub Pages deployment
+      pages: write     # Required for GitHub Pages deployment
+      id-token: write  # Required for GitHub Pages deployment
 
     steps:
     - name: Checkout code
