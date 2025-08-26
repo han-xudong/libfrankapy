@@ -1,6 +1,6 @@
 # Changelog
 
-This document records all important changes to the LibFrankaPy project.
+This document records all important changes to the libfrankapy project.
 
 Format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
@@ -131,7 +131,7 @@ All breaking changes will be detailed here, including:
 
 ## Acknowledgments
 
-Thanks to all developers and users who have contributed to the LibFrankaPy project!
+Thanks to all developers and users who have contributed to the libfrankapy project!
 
 Special thanks to:
 

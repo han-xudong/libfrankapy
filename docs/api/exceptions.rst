@@ -1,14 +1,14 @@
 Exceptions API
 ==============
 
-The exceptions module defines custom exception classes for error handling in LibFrankaPy.
+The exceptions module defines custom exception classes for error handling in libfrankapy.
 
 .. currentmodule:: libfrankapy.exceptions
 
 Exception Hierarchy
 -------------------
 
-LibFrankaPy uses a hierarchical exception system to provide detailed error information:
+libfrankapy uses a hierarchical exception system to provide detailed error information:
 
 .. code-block:: text
 
@@ -43,7 +43,7 @@ FrankaException
    :undoc-members:
    :show-inheritance:
 
-Base exception class for all LibFrankaPy exceptions.
+Base exception class for all libfrankapy exceptions.
 
 .. code-block:: python
 

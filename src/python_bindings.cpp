@@ -1,6 +1,6 @@
 /**
  * @file python_bindings.cpp
- * @brief Pybind11 bindings for LibFrankaPy
+ * @brief Pybind11 bindings for libfrankapy
  *
  * This file defines the Python bindings for the C++ real-time controller
  * and shared memory communication system.
@@ -401,7 +401,7 @@ class PySharedMemoryReader {
 
 // Pybind11 module definition
 PYBIND11_MODULE(_libfrankapy_core, m) {
-  m.doc() = "LibFrankaPy core C++ bindings";
+  m.doc() = "libfrankapy core C++ bindings";
 
   // Enums
   py::enum_<libfrankapy::ControlMode>(m, "ControlMode")

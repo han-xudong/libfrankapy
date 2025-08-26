@@ -1,7 +1,7 @@
-"""Utility functions for LibFrankaPy.
+"""Utility functions for libfrankapy.
 
-This module provides utility functions for data conversion, validation,
-and common operations used throughout the LibFrankaPy package.
+This module provides utility functions for coordinate transformations, validation,
+and common operations used throughout the libfrankapy package.
 """
 
 import math

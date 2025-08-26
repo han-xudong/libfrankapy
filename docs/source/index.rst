@@ -1,7 +1,7 @@
-LibFrankaPy Documentation
-=========================
+libfrankapy Documentation
+========================
 
-Welcome to LibFrankaPy documentation! LibFrankaPy is a Python binding project for the libfranka C++ library, designed to provide high-level Python interfaces for Franka robotic arms while maintaining the performance advantages of low-level C++ real-time control.
+Welcome to libfrankapy documentation! libfrankapy is a Python binding project for the libfranka C++ library, designed to provide high-level Python interfaces for Franka robotic arms while maintaining the performance advantages of low-level C++ real-time control.
 
 .. image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
    :target: https://opensource.org/licenses/Apache-2.0

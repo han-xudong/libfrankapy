@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""State monitoring example for LibFrankaPy.
+"""State monitoring example for libfrankapy.
 
 This example demonstrates how to monitor robot state in real-time,
 including joint positions, forces, and system status.
@@ -107,7 +107,7 @@ class RobotStateMonitor:
         print("\033[2J\033[H", end="")
 
         print("=" * 60)
-        print("           LibFrankaPy Real-time State Monitor")
+        print("           libfrankapy Real-time State Monitor")
         print("=" * 60)
 
         # Robot status
@@ -229,7 +229,7 @@ def input_thread(monitor: RobotStateMonitor, robot: fp.FrankaRobot):
 
 def setup_robot(robot_ip):
     """Setup and connect to robot."""
-    print("LibFrankaPy State Monitoring Example")
+    print("libfrankapy State Monitoring Example")
     print(f"Connecting to robot at {robot_ip}...")
 
     robot = fp.FrankaRobot(robot_ip)

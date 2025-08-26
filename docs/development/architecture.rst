@@ -1,12 +1,12 @@
 Architecture
 ============
 
-This document describes the architecture and design principles of LibFrankaPy.
+This document describes the architecture and design principles of libfrankapy.
 
 Overview
 --------
 
-LibFrankaPy is designed as a hybrid Python-C++ library that provides high-level Python interfaces while maintaining real-time performance through C++ implementation. The architecture ensures safety, performance, and ease of use.
+libfrankapy is designed as a hybrid Python-C++ library that provides high-level Python interfaces while maintaining real-time performance through C++ implementation. The architecture ensures safety, performance, and ease of use.
 
 .. code-block:: text
 
@@ -580,7 +580,7 @@ Architecture Evolution
 Conclusion
 ----------
 
-The LibFrankaPy architecture balances performance, safety, and usability through:
+The libfrankapy architecture balances performance, safety, and usability through:
 
 - **Hybrid Design**: Python ease-of-use with C++ performance
 - **Real-time Guarantees**: Deterministic control loop execution

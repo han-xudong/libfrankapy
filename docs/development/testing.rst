@@ -1,12 +1,12 @@
 Testing
 =======
 
-This document describes the testing strategy and practices for LibFrankaPy.
+This document describes the testing strategy and practices for libfrankapy.
 
 Testing Philosophy
 ------------------
 
-LibFrankaPy follows a comprehensive testing approach to ensure reliability, safety, and performance:
+libfrankapy follows a comprehensive testing approach to ensure reliability, safety, and performance:
 
 - **Safety First**: All safety-critical code must be thoroughly tested
 - **Test-Driven Development**: Write tests before implementing features
@@ -955,7 +955,7 @@ Performance Testing
 Conclusion
 ----------
 
-Comprehensive testing is essential for LibFrankaPy's reliability and safety. The testing strategy covers:
+Comprehensive testing is essential for libfrankapy's reliability and safety. The testing strategy covers:
 
 - **Multiple Test Levels**: Unit, integration, system, and performance tests
 - **Safety Focus**: Extensive testing of safety-critical functionality
@@ -963,4 +963,4 @@ Comprehensive testing is essential for LibFrankaPy's reliability and safety. The
 - **Continuous Integration**: Automated testing on every change
 - **Performance Monitoring**: Ensuring real-time performance requirements
 
-This testing approach ensures that LibFrankaPy meets the high standards required for professional robotics applications.
+This testing approach ensures that libfrankapy meets the high standards required for professional robotics applications.

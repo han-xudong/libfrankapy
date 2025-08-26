@@ -1,7 +1,7 @@
 Testing Guide
 =============
 
-LibFrankaPy employs comprehensive testing to ensure reliability, safety, and performance.
+libfrankapy employs comprehensive testing to ensure reliability, safety, and performance.
 
 Testing Philosophy
 ------------------
@@ -370,7 +370,7 @@ Latency Tests
 
     @pytest.mark.performance
     class TestPerformance:
-        """Performance tests for LibFrankaPy."""
+        """Performance tests for libfrankapy."""
         
         def test_command_latency(self, robot):
             """Test command execution latency."""

@@ -1,4 +1,4 @@
-"""Main robot interface for LibFrankaPy.
+"""Main robot interface for libfrankapy.
 
 This module provides the high-level Python interface for controlling
 Franka robots through the real-time C++ backend.

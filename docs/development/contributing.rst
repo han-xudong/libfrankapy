@@ -1,7 +1,7 @@
-Contributing
-============
+Contributing to libfrankapy
+===========================
 
-We welcome contributions to LibFrankaPy! This guide will help you get started with contributing to the project.
+We welcome contributions to libfrankapy! This guide will help you get started.
 
 Getting Started
 ---------------
@@ -500,7 +500,7 @@ Release Checklist
 Thank You!
 ----------
 
-Thank you for contributing to LibFrankaPy! Your contributions help make robotics more accessible and improve the experience for all users.
+Thank you for contributing to libfrankapy! Your contributions help make robotics more accessible and improve the experience for all users.
 
 For questions about contributing, please:
 
@@ -509,4 +509,4 @@ For questions about contributing, please:
 - Create a new issue or discussion
 - Contact the maintainers
 
-We appreciate your time and effort in making LibFrankaPy better!
+We appreciate your time and effort in making libfrankapy better!

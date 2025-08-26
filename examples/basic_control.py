@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Basic control example for LibFrankaPy.
+"""Basic control example for libfrankapy.
 
 This example demonstrates basic robot connection, state reading,
 and simple motion commands.
@@ -14,7 +14,7 @@ import libfrankapy as fp
 
 def connect_robot(robot_ip):
     """Connect to the robot and start control loop."""
-    print("LibFrankaPy Basic Control Example")
+    print("libfrankapy Basic Control Example")
     print(f"Connecting to robot at {robot_ip}...")
 
     robot = fp.FrankaRobot(robot_ip)

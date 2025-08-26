@@ -1,7 +1,7 @@
 Architecture Overview
 =====================
 
-LibFrankaPy is designed as a high-performance Python interface for Franka Emika robots, combining the ease of Python with the real-time capabilities of C++.
+libfrankapy is designed as a high-performance Python interface for Franka Emika robots, combining the ease of Python with the real-time capabilities of C++.
 
 Design Principles
 -----------------

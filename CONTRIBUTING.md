@@ -1,6 +1,6 @@
 # Contributing Guide
 
-Thank you for your interest in the LibFrankaPy project! We welcome various forms of contributions, including but not limited to:
+Thank you for your interest in the libfrankapy project! We welcome various forms of contributions, including but not limited to:
 
 - 🐛 Bug reports
 - 💡 New feature suggestions
@@ -288,7 +288,7 @@ When reporting bugs, please include the following information:
 1. **Environment Information**:
    - Operating system version
    - Python version
-   - LibFrankaPy version
+   - libfrankapy version
    - libfranka version
    - Robot model
 
@@ -321,7 +321,7 @@ Describe what actually happened.
 ## Environment Information
 - OS: [e.g. Ubuntu 22.04]
 - Python: [e.g. 3.9.0]
-- LibFrankaPy: [e.g. 1.0.0]
+- libfrankapy: [e.g. 1.0.0]
 - libfranka: [e.g. 0.15.0]
 - Robot: [e.g. Franka Panda]
 
@@ -415,7 +415,7 @@ If you need help:
 
 ## 🙏 Acknowledgments
 
-Thanks to all developers who have contributed to the LibFrankaPy project! Your contributions make this project better.
+Thanks to all developers who have contributed to the libfrankapy project! Your contributions make this project better.
 
 ---
 

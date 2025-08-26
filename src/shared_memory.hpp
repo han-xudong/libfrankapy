@@ -15,8 +15,12 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <Eigen/Dense>
 
 namespace libfrankapy {
+
+// Forward declaration
+class SharedMemoryManager;
 
 /**
  * @brief Control modes for robot operation
@@ -233,6 +237,51 @@ struct SharedMemorySegment {
   // Synchronization
   std::atomic<bool> initialized{false};
   std::atomic<uint64_t> sequence_number{0};
+};
+
+/**
+ * @brief Shared memory manager class
+ */
+class SharedMemoryManager {
+ public:
+  static constexpr const char* SHM_NAME = "/libfrankapy_shared_memory";
+  static constexpr size_t SHM_SIZE = sizeof(SharedMemorySegment);
+
+  /**
+   * @brief Constructor - creates or opens shared memory segment
+   * @param create_new If true, creates new segment; if false, opens existing
+   */
+  explicit SharedMemoryManager(bool create_new = false);
+
+  /**
+   * @brief Destructor - cleans up shared memory
+   */
+  ~SharedMemoryManager();
+
+  /**
+   * @brief Get pointer to shared memory segment
+   */
+  SharedMemorySegment* get_shared_data();
+
+  /**
+   * @brief Check if shared memory is properly initialized
+   */
+  bool is_initialized() const;
+
+  /**
+   * @brief Update sequence number for synchronization
+   */
+  void increment_sequence();
+
+  /**
+   * @brief Get current sequence number
+   */
+  uint64_t get_sequence() const;
+
+ private:
+  int shm_fd_;
+  SharedMemorySegment* shared_data_;
+  bool is_creator_;
 };
 
 }  // namespace libfrankapy

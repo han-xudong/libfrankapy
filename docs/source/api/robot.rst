@@ -1,7 +1,7 @@
 Robot API
 =========
 
-This module provides the main robot interface for LibFrankaPy.
+This module provides the main robot interface for libfrankapy.
 
 FrankaRobot Class
 -----------------

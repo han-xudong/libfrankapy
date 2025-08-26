@@ -244,7 +244,7 @@ class ReleaseManager:
 
 def main():
     """Main function."""
-    parser = argparse.ArgumentParser(description="LibFrankaPy release management tool")
+    parser = argparse.ArgumentParser(description="libfrankapy release management tool")
     parser.add_argument("version", nargs="?", help="Target version number")
     parser.add_argument(
         "--bump",

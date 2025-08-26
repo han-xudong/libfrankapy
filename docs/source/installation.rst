@@ -1,7 +1,7 @@
 Installation
 ============
 
-This guide will help you install LibFrankaPy on your system.
+This guide will help you install libfrankapy on your system.
 
 System Requirements
 -------------------
@@ -35,7 +35,7 @@ Install the required system packages:
 Libfranka Installation
 ^^^^^^^^^^^^^^^^^^^^^^
 
-LibFrankaPy requires libfranka to be installed:
+libfrankapy requires libfranka to be installed:
 
 .. code-block:: bash
 

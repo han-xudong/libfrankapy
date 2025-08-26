@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Setup script for LibFrankaPy.
+"""Setup script for libfrankapy.
 
 This script builds the C++ extension module and installs the Python package.
 """
@@ -17,7 +17,7 @@ from setuptools import find_packages, setup
 # Package information
 PACKAGE_NAME = "libfrankapy"
 VERSION = "0.1.0"
-AUTHOR = "LibFrankaPy Team"
+AUTHOR = "libfrankapy Team"
 AUTHOR_EMAIL = "support@libfrankapy.org"
 DESCRIPTION = "Python bindings for libfranka with real-time control"
 URL = "https://github.com/libfrankapy/libfrankapy"
@@ -28,7 +28,7 @@ long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 
 # Check if we're on a supported platform
 if platform.system() != "Linux":
-    raise RuntimeError("LibFrankaPy only supports Linux with PREEMPT_RT kernel")
+    raise RuntimeError("libfrankapy only supports Linux with PREEMPT_RT kernel")
 
 
 # Check for required system libraries
@@ -338,7 +338,7 @@ class CustomBuildExt(build_ext):
 
     def run(self):
         """Run the build process."""
-        print("Building LibFrankaPy C++ extension...")
+        print("Building libfrankapy C++ extension...")
         super().run()
         print("Build completed successfully!")
 
@@ -361,33 +361,13 @@ setup(
     # Extension modules
     ext_modules=[create_extension()],
     cmdclass={"build_ext": CustomBuildExt},
-    # Dependencies
+    # Dependencies (defined in pyproject.toml)
     python_requires=">=3.8",
-    install_requires=[
-        "numpy>=1.19.0",
-        "pybind11>=2.10.0",
-    ],
-    extras_require={
-        "dev": [
-            "pytest>=6.0",
-            "pytest-cov",
-            "black",
-            "isort",
-            "mypy",
-            "sphinx",
-            "sphinx-rtd-theme",
-        ],
-        "examples": [
-            "matplotlib",
-            "scipy",
-        ],
-    },
     # Metadata
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: Apache Software License",
         "Operating System :: POSIX :: Linux",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",

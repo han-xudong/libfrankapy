@@ -1,6 +1,6 @@
 /**
  * @file shared_memory.cpp
- * @brief Implementation of shared memory management for LibFrankaPy
+ * @brief Implementation of shared memory management for libfrankapy
  */
 
 #include "shared_memory.hpp"
@@ -18,24 +18,9 @@
 namespace libfrankapy {
 
 /**
- * @brief Shared memory manager class
+ * @brief SharedMemoryManager implementation
  */
-class SharedMemoryManager {
- public:
-  static constexpr const char* SHM_NAME = "/libfrankapy_shared_memory";
-  static constexpr size_t SHM_SIZE = sizeof(SharedMemorySegment);
-
- private:
-  int shm_fd_;
-  SharedMemorySegment* shared_data_;
-  bool is_creator_;
-
- public:
-  /**
-   * @brief Constructor - creates or opens shared memory segment
-   * @param create_new If true, creates new segment; if false, opens existing
-   */
-  SharedMemoryManager(bool create_new = false)
+SharedMemoryManager::SharedMemoryManager(bool create_new)
       : shm_fd_(-1), shared_data_(nullptr), is_creator_(create_new) {
     if (create_new) {
       // Remove existing shared memory if it exists
@@ -105,10 +90,10 @@ class SharedMemoryManager {
     }
   }
 
-  /**
-   * @brief Destructor - cleans up shared memory
-   */
-  ~SharedMemoryManager() {
+/**
+ * @brief Destructor - cleans up shared memory
+ */
+SharedMemoryManager::~SharedMemoryManager() {
     if (shared_data_ != nullptr) {
       munmap(shared_data_, SHM_SIZE);
     }
@@ -124,34 +109,35 @@ class SharedMemoryManager {
     }
   }
 
-  /**
-   * @brief Get pointer to shared memory segment
-   */
-  SharedMemorySegment* get_shared_data() { return shared_data_; }
+/**
+ * @brief Get pointer to shared memory segment
+ */
+SharedMemorySegment* SharedMemoryManager::get_shared_data() { 
+  return shared_data_; 
+}
 
-  /**
-   * @brief Check if shared memory is properly initialized
-   */
-  bool is_initialized() const {
-    return shared_data_ != nullptr && shared_data_->initialized.load();
-  }
+/**
+ * @brief Check if shared memory is properly initialized
+ */
+bool SharedMemoryManager::is_initialized() const {
+  return shared_data_ != nullptr && shared_data_->initialized.load();
+}
 
-  /**
-   * @brief Update sequence number for synchronization
-   */
-  void increment_sequence() {
-    if (shared_data_) {
-      shared_data_->sequence_number.fetch_add(1);
-    }
+/**
+ * @brief Update sequence number for synchronization
+ */
+void SharedMemoryManager::increment_sequence() {
+  if (shared_data_) {
+    shared_data_->sequence_number.fetch_add(1);
   }
+}
 
-  /**
-   * @brief Get current sequence number
-   */
-  uint64_t get_sequence() const {
-    return shared_data_ ? shared_data_->sequence_number.load() : 0;
-  }
-};
+/**
+ * @brief Get current sequence number
+ */
+uint64_t SharedMemoryManager::get_sequence() const {
+  return shared_data_ ? shared_data_->sequence_number.load() : 0;
+}
 
 /**
  * @brief Utility functions for working with shared memory data

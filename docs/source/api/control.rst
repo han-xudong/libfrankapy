@@ -1,7 +1,7 @@
 Control API
 ===========
 
-This module provides control interfaces for LibFrankaPy.
+This module provides control interfaces for libfrankapy.
 
 Controller Classes
 ------------------

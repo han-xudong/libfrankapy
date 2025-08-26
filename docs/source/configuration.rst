@@ -1,7 +1,7 @@
 Configuration
 =============
 
-This section covers various configuration options for LibFrankaPy.
+This section covers various configuration options for libfrankapy.
 
 Robot Configuration
 -------------------
@@ -200,7 +200,7 @@ Data Recording Configuration
 Environment Variables
 ---------------------
 
-LibFrankaPy supports several environment variables for configuration:
+libfrankapy supports several environment variables for configuration:
 
 .. code-block:: bash
 
@@ -287,7 +287,7 @@ Validation and Defaults
 Configuration Validation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-LibFrankaPy automatically validates configuration parameters:
+libfrankapy automatically validates configuration parameters:
 
 .. code-block:: python
 

@@ -1,7 +1,7 @@
 Exceptions API
 ==============
 
-This module provides exception handling for LibFrankaPy.
+This module provides exception handling for libfrankapy.
 
 Exception Hierarchy
 -------------------
@@ -11,7 +11,7 @@ Base Exception
 
 ``FrankaException``
 
-Base exception class for all LibFrankaPy exceptions.
+Base exception class for all libfrankapy exceptions.
 
 Connection Exceptions
 ~~~~~~~~~~~~~~~~~~~~~

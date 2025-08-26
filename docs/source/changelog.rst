@@ -1,7 +1,7 @@
 Changelog
 =========
 
-All notable changes to LibFrankaPy will be documented in this file.
+All notable changes to libfrankapy will be documented in this file.
 
 The format is based on `Keep a Changelog <https://keepachangelog.com/en/1.0.0/>`_,
 and this project adheres to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
@@ -36,7 +36,7 @@ Fixed
 
 Added
 ^^^^^
-- Initial release of LibFrankaPy
+- Initial release of libfrankapy
 - Core robot interface with connection management
 - Joint space control with position, velocity, and torque modes
 - Cartesian space control with pose and velocity commands
@@ -117,7 +117,7 @@ None (initial release)
 
 Contributors
 ^^^^^^^^^^^^
-- LibFrankaPy Team
+- libfrankapy Team
 - Community contributors
 
 ---
@@ -279,7 +279,7 @@ Each release follows this format:
 
 ## Versioning Policy
 
-LibFrankaPy follows Semantic Versioning (SemVer):
+libfrankapy follows Semantic Versioning (SemVer):
 
 - **MAJOR** version for incompatible API changes
 - **MINOR** version for backwards-compatible functionality additions
@@ -308,7 +308,7 @@ LibFrankaPy follows Semantic Versioning (SemVer):
 
 ## Contributing to Changelog
 
-When contributing to LibFrankaPy:
+When contributing to libfrankapy:
 
 1. **Add entries** to the "Unreleased" section
 2. **Follow the format** described above

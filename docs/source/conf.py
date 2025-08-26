@@ -19,9 +19,9 @@ sys.path.insert(0, str(project_root / "libfrankapy"))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "LibFrankaPy"
-copyright = "2024, LibFrankaPy Contributors"
-author = "LibFrankaPy Contributors"
+project = "libfrankapy"
+copyright = "2024, libfrankapy Contributors"
+author = "libfrankapy Contributors"
 
 # The full version, including alpha/beta/rc tags
 try:
@@ -239,9 +239,9 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "LibFrankaPy.tex",
-        "LibFrankaPy Documentation",
-        "LibFrankaPy Contributors",
+        "libfrankapy.tex",
+"libfrankapy Documentation",
+"libfrankapy Contributors",
         "manual",
     ),
 ]
@@ -250,7 +250,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "libfrankapy", "LibFrankaPy Documentation", [author], 1)]
+man_pages = [(master_doc, "libfrankapy", "libfrankapy Documentation", [author], 1)]
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -260,10 +260,10 @@ man_pages = [(master_doc, "libfrankapy", "LibFrankaPy Documentation", [author], 
 texinfo_documents = [
     (
         master_doc,
-        "LibFrankaPy",
-        "LibFrankaPy Documentation",
+        "libfrankapy",
+"libfrankapy Documentation",
         author,
-        "LibFrankaPy",
+        "libfrankapy",
         "Python bindings for libfranka with real-time C++ control loop.",
         "Miscellaneous",
     ),

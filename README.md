@@ -1,8 +1,8 @@
-# LibFrankaPy
+# libfrankapy
 
 [![CI](https://github.com/han-xudong/libfrankapy/workflows/CI/badge.svg)](https://github.com/han-xudong/libfrankapy/actions) [![PyPI version](https://badge.fury.io/py/libfrankapy.svg)](https://badge.fury.io/py/libfrankapy) [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-LibFrankaPy is a Python binding project for the [libfranka](https://github.com/frankarobotics/libfranka) C++ library, designed to provide high-level Python interfaces for Franka robotic arms while maintaining the performance advantages of low-level C++ real-time control.
+libfrankapy is a Python binding project for the [libfranka](https://github.com/frankarobotics/libfranka) C++ library, designed to provide high-level Python interfaces for Franka robotic arms while maintaining the performance advantages of low-level C++ real-time control.
 
 ## ✨ Features
 
@@ -14,13 +14,21 @@ LibFrankaPy is a Python binding project for the [libfranka](https://github.com/f
 - 📊 **Real-time Monitoring**: Complete robot state feedback and monitoring functionality
 - 🏗️ **Modular Design**: Clear code structure and interface separation
 
+## 📚 Documentation
+
+- **📖 Online Documentation**: [https://han-xudong.github.io/libfrankapy/](https://han-xudong.github.io/libfrankapy/)
+- **🔧 API Reference**: Complete API documentation with examples
+- **🚀 Quick Start Guide**: Step-by-step tutorials for getting started
+- **🏗️ Architecture Guide**: Detailed system architecture and design principles
+- **🛠️ Development Guide**: Contributing guidelines and development setup
+
 ## 🏗️ Architecture Design
 
-LibFrankaPy adopts a hybrid architecture of C++ real-time environment + Python high-level interface:
+libfrankapy adopts a hybrid architecture of C++ real-time environment + Python high-level interface:
 
 ```mermaid
 graph TD
-    A[Python Application Layer] --> B[LibFrankaPy Python API]
+    A[Python Application Layer] --> B[libfrankapy Python API]
     B --> C[Pybind11 Binding Layer]
     C --> D[C++ Control Manager]
     D --> E[Shared Memory Communication]
@@ -102,7 +110,7 @@ cpack -G DEB
 sudo dpkg -i libfranka*.deb
 ```
 
-### 3. Install LibFrankaPy
+### 3. Install libfrankapy
 
 #### Install from Source (Recommended)
 

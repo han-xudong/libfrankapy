@@ -1,4 +1,4 @@
-"""LibFrankaPy - Python bindings for libfranka with real-time control.
+"""libfrankapy - Python bindings for libfranka with real-time control.
 
 This package provides high-level Python interfaces for controlling Franka robots
 while maintaining real-time performance through a hybrid C++/Python architecture.
@@ -16,7 +16,7 @@ from .robot import FrankaRobot
 from .state import CartesianPose, JointState, RobotState
 
 __version__ = "0.1.0"
-__author__ = "LibFrankaPy Team"
+__author__ = "libfrankapy Team"
 __email__ = "support@libfrankapy.org"
 __description__ = "Python bindings for libfranka with real-time control"
 

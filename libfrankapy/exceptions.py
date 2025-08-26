@@ -1,6 +1,6 @@
-"""Exception classes for LibFrankaPy.
+"""Exception classes for libfrankapy.
 
-This module defines custom exception classes used throughout the LibFrankaPy package
+This module defines custom exception classes used throughout the libfrankapy package
 to provide clear error handling and debugging information.
 """
 
@@ -8,7 +8,7 @@ from typing import Optional
 
 
 class FrankaException(Exception):
-    """Base exception class for all LibFrankaPy errors.
+    """Base exception class for all libfrankapy errors.
 
     All other exceptions in this package inherit from this base class.
     """

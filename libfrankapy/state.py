@@ -1,4 +1,4 @@
-"""State data structures for LibFrankaPy.
+"""State data structures for libfrankapy.
 
 This module defines data classes for representing robot state information,
 including joint states, Cartesian poses, and complete robot state.

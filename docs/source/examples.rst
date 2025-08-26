@@ -1,7 +1,7 @@
 Examples
 ========
 
-This section provides comprehensive examples demonstrating various features of LibFrankaPy.
+This section provides comprehensive examples demonstrating various features of libfrankapy.
 
 Basic Control Examples
 ----------------------
@@ -347,7 +347,7 @@ ROS Integration
 
 .. code-block:: python
 
-   # Example of integrating LibFrankaPy with ROS
+   # Example of integrating libfrankapy with ROS
    import rospy
    import libfrankapy as fp
    from geometry_msgs.msg import PoseStamped

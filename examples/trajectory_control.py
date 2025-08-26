@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Trajectory control example for LibFrankaPy.
+"""Trajectory control example for libfrankapy.
 
 This example demonstrates how to create and execute trajectories
 for both joint space and Cartesian space motion.
@@ -110,7 +110,7 @@ def trajectory_callback(point_index, trajectory_point):
 
 def setup_robot_with_config(robot_ip):
     """Setup robot with custom configuration."""
-    print("LibFrankaPy Trajectory Control Example")
+    print("libfrankapy Trajectory Control Example")
     print(f"Connecting to robot at {robot_ip}...")
 
     config = fp.RealtimeConfig(

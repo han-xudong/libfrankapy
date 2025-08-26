@@ -1,4 +1,4 @@
-"""Control data structures for LibFrankaPy.
+"""Control data structures for libfrankapy.
 
 This module defines data classes for robot control configuration,
 trajectory planning, and safety limits.

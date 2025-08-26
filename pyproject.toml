@@ -13,19 +13,18 @@ version = "0.1.0"
 description = "Python bindings for libfranka with real-time control"
 readme = "README.md"
 requires-python = ">=3.8"
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
 authors = [
-    {name = "LibFrankaPy Team", email = "support@libfrankapy.org"},
+    {name = "libfrankapy Team", email = "support@libfrankapy.org"},
 ]
 maintainers = [
-    {name = "LibFrankaPy Team", email = "support@libfrankapy.org"},
+    {name = "libfrankapy Team", email = "support@libfrankapy.org"},
 ]
 keywords = ["robotics", "franka", "robot-control", "real-time", "panda"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",

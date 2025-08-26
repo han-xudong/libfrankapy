@@ -1,12 +1,12 @@
 Quick Start
 ===========
 
-This guide will help you get started with LibFrankaPy quickly.
+This guide will help you get started with libfrankapy quickly.
 
 Basic Setup
 -----------
 
-First, make sure you have LibFrankaPy installed and your Franka robot is properly configured.
+First, make sure you have libfrankapy installed and your Franka robot is properly configured.
 
 Connecting to the Robot
 -----------------------

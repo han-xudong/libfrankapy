@@ -9,6 +9,18 @@ on:
     # Run daily at 2 AM UTC
     - cron: '0 2 * * *'
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 env:
   # Force colored output
   FORCE_COLOR: 1
@@ -231,10 +243,12 @@ jobs:
         name: dist-packages
         path: dist/
 
-  # Documentation build
-  docs:
+  # Documentation build (for PRs and other branches)
+  docs-build:
     name: Build documentation
     runs-on: ubuntu-22.04
+    # Run for all branches except main pushes
+    if: github.ref != 'refs/heads/main' || github.event_name != 'push'
 
     steps:
     - name: Checkout code
@@ -256,7 +270,56 @@ jobs:
         cd docs
         make html
 
-    - name: Upload documentation
+    - name: Upload documentation artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation
+        path: docs/_build/html/
+
+  # Documentation build and deploy to GitHub Pages
+  docs-deploy:
+    name: Build and deploy documentation
+    runs-on: ubuntu-22.04
+    # Only deploy on main branch pushes
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip'
+
+    - name: Install documentation dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install sphinx sphinx-rtd-theme myst-parser
+
+    - name: Build documentation
+      run: |
+        cd docs
+        make html
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: docs/_build/html/
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+    - name: Upload documentation artifact
       uses: actions/upload-artifact@v4
       with:
         name: documentation

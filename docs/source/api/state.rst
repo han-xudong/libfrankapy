@@ -1,7 +1,7 @@
 State API
 =========
 
-This module provides state management and monitoring for LibFrankaPy.
+This module provides state management and monitoring for libfrankapy.
 
 State Classes
 -------------

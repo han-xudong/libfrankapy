@@ -1,14 +1,14 @@
 License
 =======
 
-LibFrankaPy is licensed under the Apache License 2.0.
+libfrankapy is licensed under the Apache License 2.0.
 
 Apache License 2.0
 -------------------
 
 .. code-block:: text
 
-   Copyright 2024 LibFrankaPy Team
+   Copyright 2024 libfrankapy Team
    
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -217,7 +217,7 @@ Full License Text
          same "printed page" as the copyright notice for easier
          identification within third-party archives.
    
-      Copyright 2024 LibFrankaPy Team
+      Copyright 2024 libfrankapy Team
    
       Licensed under the Apache License, Version 2.0 (the "License");
       you may not use this file except in compliance with the License.
@@ -234,7 +234,7 @@ Full License Text
 Third-Party Licenses
 --------------------
 
-LibFrankaPy includes or depends on several third-party libraries and components. Below are their respective licenses:
+libfrankapy includes or depends on several third-party libraries and components. Below are their respective licenses:
 
 libfranka
 ^^^^^^^^^
@@ -315,7 +315,7 @@ Commercial Use
 
 The Apache License 2.0 permits:
 
-- **Commercial Use**: You may use LibFrankaPy for commercial purposes
+- **Commercial Use**: You may use libfrankapy for commercial purposes
 - **Distribution**: You may distribute the software
 - **Modification**: You may modify the software
 - **Patent Use**: Express grant of patent rights from contributors
@@ -324,7 +324,7 @@ The Apache License 2.0 permits:
 Requirements
 ^^^^^^^^^^^^
 
-When using LibFrankaPy, you must:
+When using libfrankapy, you must:
 
 - **Include License**: Include the Apache License 2.0 text
 - **Include Copyright**: Include the original copyright notice
@@ -343,7 +343,7 @@ The Apache License 2.0 provides:
 Contributing
 ------------
 
-By contributing to LibFrankaPy, you agree that your contributions will be licensed under the Apache License 2.0.
+By contributing to libfrankapy, you agree that your contributions will be licensed under the Apache License 2.0.
 
 Contributor License Agreement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -372,7 +372,7 @@ For questions about licensing:
 Disclaimer
 ----------
 
-This document provides information about LibFrankaPy's licensing but is not legal advice. For specific legal questions, please consult with a qualified attorney.
+This document provides information about libfrankapy's licensing but is not legal advice. For specific legal questions, please consult with a qualified attorney.
 
 The license text provided here is for informational purposes. The authoritative license text is included in the LICENSE file in the project repository.
 
@@ -381,5 +381,5 @@ Links
 
 - `Apache License 2.0 Official Text <https://www.apache.org/licenses/LICENSE-2.0>`_
 - `Apache License 2.0 FAQ <https://www.apache.org/foundation/license-faq.html>`_
-- `LibFrankaPy Repository <https://github.com/libfrankapy/libfrankapy>`_
-- `LibFrankaPy License File <https://github.com/libfrankapy/libfrankapy/blob/main/LICENSE>`_
+- `libfrankapy Repository <https://github.com/libfrankapy/libfrankapy>`_
+- `libfrankapy License File <https://github.com/libfrankapy/libfrankapy/blob/main/LICENSE>`_
