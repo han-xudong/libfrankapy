@@ -812,7 +812,9 @@ class FrankaRobot:
         try:
             self.disconnect()
         except Exception:
-            pass
+            # Ignore exceptions during cleanup to prevent issues in destructor
+            # This is safe because __del__ should not raise exceptions
+            pass  # nosec B110
 
 
 # Make classes available at module level for testing
