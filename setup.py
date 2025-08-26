@@ -39,7 +39,7 @@ def check_library(lib_name, pkg_config_name=None):
     # First try pkg-config if available
     if pkg_config_name:
         try:
-            subprocess.check_call(  # nosec B603,B607
+            subprocess.check_call(  # nosec B603 B607
                 ["pkg-config", "--exists", pkg_config_name],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
@@ -121,7 +121,7 @@ def check_poco_library():
     # Try pkg-config first
     for pkg_name in ["poco-foundation", "poco", "libpoco-foundation"]:
         try:
-            subprocess.check_call(  # nosec B603,B607
+            subprocess.check_call(  # nosec B603 B607
                 ["pkg-config", "--exists", pkg_name],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
@@ -228,7 +228,7 @@ def get_include_dirs():
     # Try to get Eigen3 include directory
     try:
         eigen_include = (
-            subprocess.check_output(  # nosec B603,B607
+            subprocess.check_output(  # nosec B603 B607
                 ["pkg-config", "--cflags-only-I", "eigen3"], stderr=subprocess.DEVNULL
             )
             .decode()
