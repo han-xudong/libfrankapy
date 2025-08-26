@@ -78,6 +78,8 @@ repos:
       - id: bandit
         args: [-r, libfrankapy/]
         exclude: tests/
+        additional_dependencies:
+          - pbr
 
   # Docstring checks
   - repo: https://github.com/pycqa/pydocstyle

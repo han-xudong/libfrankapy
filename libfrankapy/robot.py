@@ -93,7 +93,7 @@ except ImportError:
             """Trigger emergency stop."""
             pass
 
-        def get_joint_positions(self) -> np.ndarray:
+        def get_joint_positions(self) -> np.ndarray[Any, np.dtype[np.floating[Any]]]:
             """Get current joint positions.
 
             Returns:
@@ -124,7 +124,7 @@ except ImportError:
             """
             return True
 
-        def get_robot_state(self) -> dict:
+        def get_robot_state(self) -> dict[str, Any]:
             """Get current robot state.
 
             Returns:
@@ -597,7 +597,7 @@ class FrankaRobot:
 
         try:
             # Send joint position command
-            positions_array: np.ndarray = np.array(joint_positions, dtype=np.float64)
+            positions_array: np.ndarray[Any, np.dtype[np.floating[Any]]] = np.array(joint_positions, dtype=np.float64)
             success = self._controller.send_joint_position_command(
                 positions_array, speed_factor, acceleration_factor, timeout
             )
@@ -681,8 +681,8 @@ class FrankaRobot:
 
         try:
             # Send Cartesian position command
-            position_array: np.ndarray = np.array(position, dtype=np.float64)
-            orientation_array: np.ndarray = np.array([qx, qy, qz, qw], dtype=np.float64)
+            position_array: np.ndarray[Any, np.dtype[np.floating[Any]]] = np.array(position, dtype=np.float64)
+            orientation_array: np.ndarray[Any, np.dtype[np.floating[Any]]] = np.array([qx, qy, qz, qw], dtype=np.float64)
 
             success = self._controller.send_cartesian_position_command(
                 position_array,
