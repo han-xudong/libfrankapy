@@ -16,6 +16,7 @@
 #include "shared_memory.hpp"
 
 namespace py = pybind11;
+using namespace py::literals;
 
 namespace libfrankapy {
 
@@ -51,7 +52,7 @@ class PyRealtimeController {
     }
 
     auto shared_data = shared_memory->get_shared_data();
-    auto positions = shared_memory_utils::get_joint_positions(
+    auto positions = libfrankapy::shared_memory_utils::get_joint_positions(
         shared_data->state.joint_positions);
 
     return py::cast(positions);
@@ -94,7 +95,7 @@ class PyRealtimeController {
     }
 
     auto shared_data = shared_memory->get_shared_data();
-    auto position = shared_memory_utils::get_cartesian_position(
+    auto position = libfrankapy::shared_memory_utils::get_cartesian_position(
         shared_data->state.cartesian_position);
 
     return py::cast(position);
@@ -107,7 +108,7 @@ class PyRealtimeController {
     }
 
     auto shared_data = shared_memory->get_shared_data();
-    auto orientation = shared_memory_utils::get_quaternion(
+    auto orientation = libfrankapy::shared_memory_utils::get_quaternion(
         shared_data->state.cartesian_orientation);
 
     return py::cast(orientation);
@@ -224,7 +225,7 @@ class PyRealtimeController {
     command.joint_acceleration_factor.store(acceleration_factor);
     command.timeout.store(timeout);
 
-    shared_memory_utils::update_timestamp(command.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(command.timestamp);
     command.command_acknowledged.store(false);
     command.new_command.store(true);
 
@@ -288,7 +289,7 @@ class PyRealtimeController {
     command.motion_type.store(motion_type);
     command.timeout.store(timeout);
 
-    shared_memory_utils::update_timestamp(command.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(command.timestamp);
     command.command_acknowledged.store(false);
     command.new_command.store(true);
 

@@ -85,7 +85,7 @@ bool RealtimeController::connect() {
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.is_connected.store(true);
     shared_data->state.has_error.store(false);
-    shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
 
     std::cout << "Successfully connected to robot" << std::endl;
     return true;
@@ -115,7 +115,7 @@ void RealtimeController::disconnect() {
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.is_connected.store(false);
     shared_data->state.control_mode.store(static_cast<int>(ControlMode::IDLE));
-    shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
   }
 
   // Cleanup robot connections
@@ -182,7 +182,7 @@ void RealtimeController::emergency_stop() {
   if (shared_memory_) {
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.emergency_stop.store(true);
-    shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
   }
 
   std::cout << "Emergency stop requested" << std::endl;
@@ -262,7 +262,7 @@ void RealtimeController::update_shared_state(
   auto& state = shared_data->state;
 
   // Update timestamp
-  shared_memory_utils::update_timestamp(state.timestamp);
+  libfrankapy::shared_memory_utils::update_timestamp(state.timestamp);
 
   // Update joint state
   for (size_t i = 0; i < 7; ++i) {
@@ -471,7 +471,7 @@ void RealtimeController::handle_robot_error(const std::string& error_message,
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.has_error.store(true);
     shared_data->state.error_code.store(error_code);
-    shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
   }
 }
 
