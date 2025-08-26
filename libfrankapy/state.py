@@ -168,6 +168,10 @@ class RobotState:
         torque_threshold: float = 1.0  # Nm
 
         force_magnitude: float = sum(f**2 for f in self.external_wrench.force) ** 0.5
-        torque_magnitude: float = sum(t**2 for t in self.external_wrench.torque) ** 0.5
+        torque_magnitude: float = (
+            sum(t**2 for t in self.external_wrench.torque) ** 0.5
+        )
 
-        return bool(force_magnitude > force_threshold or torque_magnitude > torque_threshold)
+        return bool(
+            force_magnitude > force_threshold or torque_magnitude > torque_threshold
+        )

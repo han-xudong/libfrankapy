@@ -10,12 +10,12 @@
 
 #pragma once
 
+#include <Eigen/Dense>
 #include <array>
 #include <atomic>
 #include <cstdint>
 #include <memory>
 #include <string>
-#include <Eigen/Dense>
 
 namespace libfrankapy {
 

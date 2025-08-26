@@ -85,7 +85,8 @@ bool RealtimeController::connect() {
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.is_connected.store(true);
     shared_data->state.has_error.store(false);
-    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(
+        shared_data->state.timestamp);
 
     std::cout << "Successfully connected to robot" << std::endl;
     return true;
@@ -115,7 +116,8 @@ void RealtimeController::disconnect() {
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.is_connected.store(false);
     shared_data->state.control_mode.store(static_cast<int>(ControlMode::IDLE));
-    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(
+        shared_data->state.timestamp);
   }
 
   // Cleanup robot connections
@@ -182,7 +184,8 @@ void RealtimeController::emergency_stop() {
   if (shared_memory_) {
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.emergency_stop.store(true);
-    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(
+        shared_data->state.timestamp);
   }
 
   std::cout << "Emergency stop requested" << std::endl;
@@ -208,7 +211,8 @@ void RealtimeController::control_loop() {
   try {
     // Main control loop
     robot_->control([this](const franka::RobotState& robot_state,
-                           franka::Duration /* period */) -> franka::JointPositions {
+                           franka::Duration /* period */)
+                        -> franka::JointPositions {
       // Check for stop conditions
       if (should_stop_.load() || emergency_stop_requested_.load()) {
         return franka::MotionFinished(franka::JointPositions(robot_state.q_d));
@@ -468,7 +472,8 @@ void RealtimeController::handle_robot_error(const std::string& error_message,
     auto shared_data = shared_memory_->get_shared_data();
     shared_data->state.has_error.store(true);
     shared_data->state.error_code.store(error_code);
-    libfrankapy::shared_memory_utils::update_timestamp(shared_data->state.timestamp);
+    libfrankapy::shared_memory_utils::update_timestamp(
+        shared_data->state.timestamp);
   }
 }
 

@@ -283,7 +283,7 @@ jobs:
     runs-on: ubuntu-22.04
     # Only deploy on main branch pushes
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

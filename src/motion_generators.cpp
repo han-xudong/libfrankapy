@@ -3,13 +3,14 @@
  * @brief Implementation of motion generators for joint and Cartesian control
  */
 
-#include <algorithm>
-#include <cmath>
-#include <iostream>
 #include <pthread.h>
 #include <sys/mman.h>
+
+#include <algorithm>
 #include <cerrno>
+#include <cmath>
 #include <cstring>
+#include <iostream>
 
 #include "realtime_controller.hpp"
 

@@ -88,10 +88,10 @@ jobs:
       run: |
         # Update version in pyproject.toml
         sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
-        
+
         # Update version in __init__.py
         sed -i "s/__version__ = \".*\"/__version__ = \"$VERSION\"/" libfrankapy/__init__.py
-        
+
         # Verify changes
         echo "Updated pyproject.toml:"
         grep "^version = " pyproject.toml
@@ -141,7 +141,7 @@ jobs:
       run: |
         # Update version in pyproject.toml
         sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
-        
+
         # Update version in __init__.py
         sed -i "s/__version__ = \".*\"/__version__ = \"$VERSION\"/" libfrankapy/__init__.py
 
