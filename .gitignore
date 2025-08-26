@@ -252,3 +252,31 @@ htmlcov/
 local_config.py
 local_config.yaml
 local_config.json
+
+# Node.js dependencies and files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# npm cache
+.npm
+
+# Yarn cache
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# VitePress specific
+.vitepress/cache/
+.vitepress/dist/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
+# Build outputs
+dist/
+out/

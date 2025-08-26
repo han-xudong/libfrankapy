@@ -206,12 +206,9 @@ void RealtimeController::control_loop() {
   }
 
   try {
-    // Read initial robot state
-    franka::RobotState initial_state = robot_->readOnce();
-
     // Main control loop
     robot_->control([this](const franka::RobotState& robot_state,
-                           franka::Duration period) -> franka::JointPositions {
+                           franka::Duration /* period */) -> franka::JointPositions {
       // Check for stop conditions
       if (should_stop_.load() || emergency_stop_requested_.load()) {
         return franka::MotionFinished(franka::JointPositions(robot_state.q_d));
@@ -237,7 +234,7 @@ void RealtimeController::control_loop() {
     });
 
   } catch (const franka::ControlException& e) {
-    handle_robot_error("Control exception: " + std::string(e.what()), e.id);
+    handle_robot_error("Control exception: " + std::string(e.what()), -2);
   } catch (const franka::Exception& e) {
     handle_robot_error("Robot exception: " + std::string(e.what()), -3);
   } catch (const std::exception& e) {
@@ -311,7 +308,7 @@ void RealtimeController::update_shared_state(
 }
 
 bool RealtimeController::process_control_commands(
-    const franka::RobotState& robot_state) {
+    const franka::RobotState& /* robot_state */) {
   if (!shared_memory_) return false;
 
   auto shared_data = shared_memory_->get_shared_data();
