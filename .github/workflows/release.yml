@@ -14,8 +14,12 @@ env:
 jobs:
   # Build distribution packages
   build:
-    name: Build distribution packages
+    name: Build Python ${{ matrix.python-version }} packages
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
 
     steps:
     - name: Checkout code
@@ -24,10 +28,10 @@ jobs:
         submodules: recursive
         fetch-depth: 0  # Get full history for version tags
 
-    - name: Setup Python
+    - name: Setup Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ env.PYTHON_VERSION }}
+        python-version: ${{ matrix.python-version }}
         cache: 'pip'
 
     - name: Install system dependencies
@@ -122,7 +126,7 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: dist-packages-${{ env.VERSION }}
+        name: dist-packages-${{ env.VERSION }}-py${{ matrix.python-version }}
         path: dist/
         retention-days: 30
 
@@ -195,8 +199,9 @@ jobs:
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
-        name: dist-packages-${{ env.VERSION }}
+        pattern: dist-packages-${{ env.VERSION }}-py*
         path: dist/
+        merge-multiple: true
 
     - name: Install package and test
       run: |
@@ -229,8 +234,9 @@ jobs:
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
-        name: dist-packages-${{ env.VERSION }}
+        pattern: dist-packages-${{ env.VERSION }}-py*
         path: dist/
+        merge-multiple: true
 
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
@@ -260,8 +266,9 @@ jobs:
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
-        name: dist-packages-${{ env.VERSION }}
+        pattern: dist-packages-${{ env.VERSION }}-py*
         path: dist/
+        merge-multiple: true
 
     - name: Generate changelog
       id: changelog

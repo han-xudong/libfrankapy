@@ -12,7 +12,7 @@ name = "libfrankapy"
 version = "0.1.0"
 description = "Python bindings for libfranka with real-time control"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {text = "Apache-2.0"}
 authors = [
     {name = "libfrankapy Team", email = "support@libfrankapy.org"},
@@ -27,7 +27,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
+
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -89,7 +89,7 @@ libfrankapy = ["py.typed"]
 # Black configuration
 [tool.black]
 line-length = 88
-target-version = ['py38']
+target-version = ['py39']
 include = '\\.pyi?$'
 extend-exclude = '''
 (

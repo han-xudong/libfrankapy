@@ -361,7 +361,7 @@ setup(
     ext_modules=[create_extension()],
     cmdclass={"build_ext": CustomBuildExt},
     # Dependencies (defined in pyproject.toml)
-    python_requires=">=3.8",
+    python_requires=">=3.9",
     # Metadata
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -369,7 +369,7 @@ setup(
         "Intended Audience :: Developers",
         "Operating System :: POSIX :: Linux",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
+
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
