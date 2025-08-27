@@ -1,6 +1,6 @@
 # libfrankapy
 
-[![CI](https://github.com/han-xudong/libfrankapy/workflows/CI/badge.svg)](https://github.com/han-xudong/libfrankapy/actions) [![PyPI version](https://img.shields.io/pypi/v/libfrankapy)](https://pypi.org/project/libfrankapy/) [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Documentation](https://img.shields.io/badge/Documentation-released-blue.svg)](https://han-xudong.github.io/libfrankapy/)
+ [![PyPI version](https://img.shields.io/pypi/v/libfrankapy?color=3776AB)](https://pypi.org/project/libfrankapy/) [![Python 3.9+](https://img.shields.io/badge/python-3.9+-3776AB)](https://www.python.org/downloads/) [![CI](https://img.shields.io/github/actions/workflow/status/han-xudong/libfrankapy/ci.yml?label=CI)](https://github.com/han-xudong/libfrankapy/actions) [![License](https://img.shields.io/badge/License-Apache%202.0-3DA639)](https://opensource.org/licenses/Apache-2.0) [![Documentation](https://img.shields.io/badge/Documentation-newest-5C73E7)](https://han-xudong.github.io/libfrankapy/)
 
 libfrankapy is a Python binding project for the [libfranka](https://github.com/frankarobotics/libfranka) library, designed to provide high-level Python interfaces for Franka robotic arms while maintaining the performance advantages of low-level C++ real-time control.
 
