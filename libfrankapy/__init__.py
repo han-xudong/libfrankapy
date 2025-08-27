@@ -22,7 +22,7 @@ except ImportError:
     from .robot import _FallbackRealtimeController as RealtimeController
     from .robot import _FallbackSharedMemoryReader as SharedMemoryReader
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "libfrankapy Team"
 __email__ = "support@libfrankapy.org"
 __description__ = "Python bindings for libfranka with real-time control"

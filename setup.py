@@ -16,7 +16,7 @@ from setuptools import find_packages, setup
 
 # Package information
 PACKAGE_NAME = "libfrankapy"
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 AUTHOR = "libfrankapy Team"
 AUTHOR_EMAIL = "support@libfrankapy.org"
 DESCRIPTION = "Python bindings for libfranka with real-time control"
