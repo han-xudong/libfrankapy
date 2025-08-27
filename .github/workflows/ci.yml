@@ -49,26 +49,6 @@ jobs:
         pip install flake8 black isort mypy pre-commit
         pip install flake8-docstrings flake8-import-order flake8-bugbear flake8-comprehensions flake8-simplify
 
-    - name: Run flake8
-      run: |
-        flake8 libfrankapy/ tests/ examples/ \
-          --max-line-length=88 \
-          --extend-ignore=E203,W503,E501,D100,D104,D105,D107,C901,SIM102,SIM105,SIM111,SIM117,B007,I100,F811 \
-          --exclude=build,dist,*.egg-info,.git,.tox,.pytest_cache,docs/_build,venv,.venv \
-          --max-complexity=20 \
-          --docstring-convention=google \
-          --import-order-style=google \
-          --application-import-names=libfrankapy
-
-    - name: Check code format (black)
-      run: black --check libfrankapy/ tests/ examples/
-
-    - name: Check import sorting (isort)
-      run: isort --check-only libfrankapy/ tests/ examples/
-
-    - name: Type checking (mypy)
-      run: mypy libfrankapy/
-
     - name: Run pre-commit checks
       run: |
         pre-commit install
