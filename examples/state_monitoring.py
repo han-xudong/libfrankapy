@@ -112,7 +112,7 @@ class RobotStateMonitor:
 
         # Robot status
         print(f"Robot Mode: {state.robot_mode}")
-        print(f"Control Frequency: {state.control_frequency:.1f} Hz")
+        print(f"Control Frequency: {state.control_frequency: .1f} Hz")
         print(f"Moving: {'Yes' if self.robot.is_moving() else 'No'}")
         print(f"Error: {'Yes' if self.robot.has_error() else 'No'}")
         if self.robot.has_error():
@@ -123,16 +123,16 @@ class RobotStateMonitor:
         joint_vel = np.array(state.joint_state.velocities)
         joint_torques = np.array(state.joint_state.efforts)
 
-        print(f"Positions (rad): {joint_pos:.3f}")
-        print(f"Velocities (rad/s): {joint_vel:.3f}")
-        print(f"Torques (Nm): {joint_torques:.3f}")
+        print(f"Positions (rad): {joint_pos: .3f}")
+        print(f"Velocities (rad/s): {joint_vel: .3f}")
+        print(f"Torques (Nm): {joint_torques: .3f}")
 
         print("\n--- Cartesian State ---")
         cart_pos = np.array(state.cartesian_pose.position)
         cart_ori = np.array(state.cartesian_pose.orientation)
 
-        print(f"Position (m): {cart_pos:.4f}")
-        print(f"Orientation (quat): {cart_ori:.4f}")
+        print(f"Position (m): {cart_pos: .4f}")
+        print(f"Orientation (quat): {cart_ori: .4f}")
 
         # Convert quaternion to Euler angles for display
         try:
@@ -140,7 +140,7 @@ class RobotStateMonitor:
 
             roll, pitch, yaw = quaternion_to_euler(*cart_ori)
             euler_deg = np.degrees([roll, pitch, yaw])
-            print(f"Orientation (deg): {euler_deg:.1f}")
+            print(f"Orientation (deg): {euler_deg: .1f}")
         except Exception:  # nosec B110
             # Silently ignore conversion errors - quaternion display is optional
             pass
@@ -152,17 +152,17 @@ class RobotStateMonitor:
             force_magnitude = np.linalg.norm(ext_force)
             torque_magnitude = np.linalg.norm(ext_torque)
 
-            print(f"Force (N): {ext_force:.2f}")
-            print(f"Torque (Nm): {ext_torque:.2f}")
-            print(f"Force Magnitude: {force_magnitude:.2f} N")
-            print(f"Torque Magnitude: {torque_magnitude:.2f} Nm")
+            print(f"Force (N): {ext_force: .2f}")
+            print(f"Torque (Nm): {ext_torque: .2f}")
+            print(f"Force Magnitude: {force_magnitude: .2f} N")
+            print(f"Torque Magnitude: {torque_magnitude: .2f} Nm")
         else:
             print("No external wrench data")
 
         print("\n--- Statistics ---")
-        print(f"Max Force: {self.max_force:.2f} N")
-        print(f"Max Velocity: {self.max_velocity:.3f} rad/s")
-        print(f"Total Distance: {self.total_distance:.4f} m")
+        print(f"Max Force: {self.max_force: .2f} N")
+        print(f"Max Velocity: {self.max_velocity: .3f} rad/s")
+        print(f"Total Distance: {self.total_distance: .4f} m")
         print(f"History Length: {len(self.position_history)}")
 
         print("\n--- Controls ---")

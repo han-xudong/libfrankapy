@@ -104,8 +104,8 @@ def trajectory_callback(point_index, trajectory_point):
         trajectory_point: Current trajectory point being executed
     """
     print(f"Executing trajectory point {point_index + 1}")
-    print(f"  Target positions: {np.array(trajectory_point.positions):.3f}")
-    print(f"  Time from start: {trajectory_point.time_from_start:.1f}s")
+    print(f"  Target positions: {np.array(trajectory_point.positions): .3f}")
+    print(f"  Time from start: {trajectory_point.time_from_start: .1f}s")
 
 
 def setup_robot_with_config(robot_ip):
@@ -138,13 +138,13 @@ def execute_joint_trajectory(robot):
     joint_trajectory = create_joint_trajectory()
 
     print(f"Executing joint trajectory with {len(joint_trajectory.points)} waypoints")
-    print(f"Total duration: {joint_trajectory.duration:.1f} seconds")
+    print(f"Total duration: {joint_trajectory.duration: .1f} seconds")
 
     start_time = time.time()
     robot.execute_trajectory(joint_trajectory, callback=trajectory_callback)
     execution_time = time.time() - start_time
 
-    print(f"Joint trajectory completed in {execution_time:.1f} seconds")
+    print(f"Joint trajectory completed in {execution_time: .1f} seconds")
     time.sleep(2.0)
 
 
@@ -159,14 +159,14 @@ def execute_cartesian_trajectory(robot):
     print(
         f"Executing Cartesian trajectory with {len(cartesian_trajectory.points)} waypoints"
     )
-    print(f"Total duration: {cartesian_trajectory.duration:.1f} seconds")
-    print(f"Starting position: {np.array(current_pose.position):.3f}")
+    print(f"Total duration: {cartesian_trajectory.duration: .1f} seconds")
+    print(f"Starting position: {np.array(current_pose.position): .3f}")
 
     start_time = time.time()
     robot.execute_trajectory(cartesian_trajectory, callback=trajectory_callback)
     execution_time = time.time() - start_time
 
-    print(f"Cartesian trajectory completed in {execution_time:.1f} seconds")
+    print(f"Cartesian trajectory completed in {execution_time: .1f} seconds")
 
 
 def run_trajectory_demo(robot):

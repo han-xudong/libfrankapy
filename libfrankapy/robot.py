@@ -98,7 +98,7 @@ except ImportError:
             Returns:
                 Array of joint positions
             """
-            return np.zeros(7)
+            return np.zeros(7, dtype=np.float64)  # type: ignore[no-any-return]
 
         def send_joint_position_command(self, *args: Any, **kwargs: Any) -> bool:
             """Send joint position command.
