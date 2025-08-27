@@ -97,35 +97,6 @@ See the `examples/` directory for more usage examples:
 
 **Note**: When using this library to control robotic arms, please ensure you follow all safety protocols and test in a controlled environment.
 
-## 🏗️ Architecture Design
-
-libfrankapy adopts a hybrid architecture of C++ real-time environment + Python high-level interface:
-
-```mermaid
-graph TD
-    A[Python Application Layer] --> B[libfrankapy Python API]
-    B --> C[Pybind11 Binding Layer]
-    C --> D[C++ Control Manager]
-    D --> E[Shared Memory Communication]
-    E --> F[Real-time Control Thread]
-    F --> G[LibFranka C++ Library]
-    G --> H[Franka Robotic Arm Hardware]
-    E --> I[Shared Memory Reader]
-    I --> B
-    J[RealtimeConfig] --> D
-
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#fff3e0
-    style D fill:#e8f5e8
-    style E fill:#fff9c4
-    style F fill:#ffebee
-    style G fill:#f1f8e9
-    style H fill:#fce4ec
-    style I fill:#e8eaf6
-    style J fill:#f3e5f5
-```
-
 ## 🤝 Contributing
 
 We welcome community contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to participate in project development.
