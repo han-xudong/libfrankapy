@@ -113,8 +113,6 @@ graph TD
     E --> I[Shared Memory Reader]
     I --> B
     J[RealtimeConfig] --> D
-    B -."Control Command".-> E
-    E -."State Data".-> I
     
     style A fill:#e1f5fe
     style B fill:#f3e5f5
