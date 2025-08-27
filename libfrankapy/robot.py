@@ -5,7 +5,7 @@ Franka robots through the real-time C++ backend.
 """
 
 import threading
-from typing import Any, Callable, List, Optional, Union
+from typing import Any, Callable, Optional, Union
 
 import numpy as np
 
@@ -419,7 +419,7 @@ class FrankaRobot:
         except Exception as e:
             raise StateError(f"Failed to get robot state: {e}")
 
-    def get_joint_torques(self) -> List[float]:
+    def get_joint_torques(self) -> list[float]:
         """Get current joint torques.
 
         Returns:
@@ -546,7 +546,7 @@ class FrankaRobot:
 
     def move_to_joint(
         self,
-        joint_positions: List[float],
+        joint_positions: list[float],
         speed_factor: float = 0.1,
         acceleration_factor: float = 0.1,
         timeout: float = 30.0,
@@ -622,7 +622,7 @@ class FrankaRobot:
 
     def move_to_pose(
         self,
-        target_pose: List[float],
+        target_pose: list[float],
         speed_factor: float = 0.1,
         motion_type: Union[MotionType, str] = MotionType.LINEAR,
         timeout: float = 30.0,

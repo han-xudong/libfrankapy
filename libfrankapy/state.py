@@ -6,7 +6,7 @@ including joint states, Cartesian poses, and complete robot state.
 
 import time
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
 
 
 @dataclass
@@ -20,9 +20,9 @@ class JointState:
         timestamp: Time when state was captured (seconds since epoch)
     """
 
-    positions: List[float]  # 7 joint angles in radians
-    velocities: List[float]  # 7 joint velocities in rad/s
-    efforts: List[float]  # 7 joint torques in Nm
+    positions: list[float]  # 7 joint angles in radians
+    velocities: list[float]  # 7 joint velocities in rad/s
+    efforts: list[float]  # 7 joint torques in Nm
     timestamp: float = 0.0
 
     def __post_init__(self) -> None:
@@ -48,8 +48,8 @@ class CartesianPose:
         timestamp: Time when pose was captured (seconds since epoch)
     """
 
-    position: List[float]  # [x, y, z] in meters
-    orientation: List[float]  # [qx, qy, qz, qw] quaternion
+    position: list[float]  # [x, y, z] in meters
+    orientation: list[float]  # [qx, qy, qz, qw] quaternion
     timestamp: float = 0.0
 
     def __post_init__(self) -> None:
@@ -110,8 +110,8 @@ class ForceTorque:
         timestamp: Time when measurement was taken
     """
 
-    force: List[float]  # [fx, fy, fz] in N
-    torque: List[float]  # [tx, ty, tz] in Nm
+    force: list[float]  # [fx, fy, fz] in N
+    torque: list[float]  # [tx, ty, tz] in Nm
     timestamp: float = 0.0
 
     def __post_init__(self) -> None:

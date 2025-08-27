@@ -115,7 +115,7 @@ jobs:
         # List built wheel files
         echo "Built distribution packages:"
         ls -la dist/
-        
+
         # Note: Skipping auditwheel repair because libfranka is a system dependency
         # that users need to install separately. The wheel uses platform tags from pyproject.toml
 

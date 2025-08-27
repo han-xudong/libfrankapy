@@ -113,7 +113,7 @@ graph TD
     E --> I[Shared Memory Reader]
     I --> B
     J[RealtimeConfig] --> D
-    
+
     style A fill:#e1f5fe
     style B fill:#f3e5f5
     style C fill:#fff3e0

@@ -5,10 +5,10 @@ and common operations used throughout the libfrankapy package.
 """
 
 import math
-from typing import List, Tuple, Union
+from typing import Union
 
 
-def validate_joint_positions(positions: List[float]) -> bool:
+def validate_joint_positions(positions: list[float]) -> bool:
     """Validate joint positions are within safe ranges.
 
     Args:
@@ -38,7 +38,7 @@ def validate_joint_positions(positions: List[float]) -> bool:
     return True
 
 
-def validate_cartesian_pose(pose: List[float]) -> bool:
+def validate_cartesian_pose(pose: list[float]) -> bool:
     """Validate Cartesian pose format and values.
 
     Args:
@@ -78,7 +78,7 @@ def validate_cartesian_pose(pose: List[float]) -> bool:
 
 def quaternion_to_euler(
     qx: float, qy: float, qz: float, qw: float
-) -> Tuple[float, float, float]:
+) -> tuple[float, float, float]:
     """Convert quaternion to Euler angles (roll, pitch, yaw).
 
     Args:
@@ -109,7 +109,7 @@ def quaternion_to_euler(
 
 def euler_to_quaternion(
     roll: float, pitch: float, yaw: float
-) -> Tuple[float, float, float, float]:
+) -> tuple[float, float, float, float]:
     """Convert Euler angles to quaternion.
 
     Args:
@@ -135,7 +135,7 @@ def euler_to_quaternion(
 
 def normalize_quaternion(
     qx: float, qy: float, qz: float, qw: float
-) -> Tuple[float, float, float, float]:
+) -> tuple[float, float, float, float]:
     """Normalize a quaternion.
 
     Args:
@@ -152,8 +152,8 @@ def normalize_quaternion(
 
 
 def interpolate_joint_positions(
-    start: List[float], end: List[float], t: float
-) -> List[float]:
+    start: list[float], end: list[float], t: float
+) -> list[float]:
     """Linearly interpolate between two joint configurations.
 
     Args:
@@ -173,7 +173,7 @@ def interpolate_joint_positions(
     return [s + t * (e - s) for s, e in zip(start, end)]
 
 
-def compute_joint_distance(pos1: List[float], pos2: List[float]) -> float:
+def compute_joint_distance(pos1: list[float], pos2: list[float]) -> float:
     """Compute distance between two joint configurations.
 
     Args:
@@ -189,8 +189,8 @@ def compute_joint_distance(pos1: List[float], pos2: List[float]) -> float:
 
 
 def compute_cartesian_distance(
-    pose1: List[float], pose2: List[float]
-) -> Tuple[float, float]:
+    pose1: list[float], pose2: list[float]
+) -> tuple[float, float]:
     """Compute distance between two Cartesian poses.
 
     Args:
@@ -229,7 +229,7 @@ def clamp_value(value: float, min_val: float, max_val: float) -> float:
     return max(min_val, min(value, max_val))
 
 
-def degrees_to_radians(degrees: Union[float, List[float]]) -> Union[float, List[float]]:
+def degrees_to_radians(degrees: Union[float, list[float]]) -> Union[float, list[float]]:
     """Convert degrees to radians.
 
     Args:
@@ -243,7 +243,7 @@ def degrees_to_radians(degrees: Union[float, List[float]]) -> Union[float, List[
     return math.radians(degrees)
 
 
-def radians_to_degrees(radians: Union[float, List[float]]) -> Union[float, List[float]]:
+def radians_to_degrees(radians: Union[float, list[float]]) -> Union[float, list[float]]:
     """Convert radians to degrees.
 
     Args:
@@ -257,7 +257,7 @@ def radians_to_degrees(radians: Union[float, List[float]]) -> Union[float, List[
     return math.degrees(radians)
 
 
-def create_home_position() -> List[float]:
+def create_home_position() -> list[float]:
     """Create a safe home joint configuration.
 
     Returns:
@@ -266,7 +266,7 @@ def create_home_position() -> List[float]:
     return [0.0, -0.785, 0.0, -2.356, 0.0, 1.571, 0.785]
 
 
-def create_ready_position() -> List[float]:
+def create_ready_position() -> list[float]:
     """Create a ready joint configuration for manipulation.
 
     Returns:

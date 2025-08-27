@@ -6,7 +6,7 @@ trajectory planning, and safety limits.
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import List, Optional
+from typing import Optional
 
 
 class ControlMode(Enum):
@@ -44,17 +44,17 @@ class SafetyLimits:
         collision_threshold: Collision detection threshold
     """
 
-    max_joint_velocity: List[float] = field(default_factory=lambda: [2.175] * 7)
-    max_joint_acceleration: List[float] = field(default_factory=lambda: [15.0] * 7)
-    max_joint_jerk: List[float] = field(default_factory=lambda: [7500.0] * 7)
-    max_cartesian_velocity: List[float] = field(
+    max_joint_velocity: list[float] = field(default_factory=lambda: [2.175] * 7)
+    max_joint_acceleration: list[float] = field(default_factory=lambda: [15.0] * 7)
+    max_joint_jerk: list[float] = field(default_factory=lambda: [7500.0] * 7)
+    max_cartesian_velocity: list[float] = field(
         default_factory=lambda: [1.7, 2.5, 2.5, 2.5, 2.5, 2.5]
     )
-    max_cartesian_acceleration: List[float] = field(
+    max_cartesian_acceleration: list[float] = field(
         default_factory=lambda: [13.0, 25.0, 25.0, 25.0, 25.0, 25.0]
     )
-    max_force: List[float] = field(default_factory=lambda: [20.0, 20.0, 20.0])
-    max_torque: List[float] = field(default_factory=lambda: [25.0, 25.0, 25.0])
+    max_force: list[float] = field(default_factory=lambda: [20.0, 20.0, 20.0])
+    max_torque: list[float] = field(default_factory=lambda: [25.0, 25.0, 25.0])
     collision_threshold: float = 20.0
 
     def __post_init__(self) -> None:
@@ -116,9 +116,9 @@ class TrajectoryPoint:
         time_from_start: Time from trajectory start in seconds
     """
 
-    positions: List[float]
-    velocities: Optional[List[float]] = None
-    accelerations: Optional[List[float]] = None
+    positions: list[float]
+    velocities: Optional[list[float]] = None
+    accelerations: Optional[list[float]] = None
     time_from_start: float = 0.0
 
     def __post_init__(self) -> None:
@@ -147,7 +147,7 @@ class Trajectory:
         acceleration_factor: Global acceleration scaling factor (0.0 to 1.0)
     """
 
-    points: List[TrajectoryPoint]
+    points: list[TrajectoryPoint]
     control_mode: ControlMode = ControlMode.JOINT_POSITION
     motion_type: MotionType = MotionType.JOINT_INTERPOLATED
     speed_factor: float = 1.0
@@ -204,7 +204,7 @@ class MotionCommand:
 
     command_id: int
     command_type: ControlMode
-    target_positions: List[float]
+    target_positions: list[float]
     speed_factor: float = 0.1
     acceleration_factor: float = 0.1
     motion_type: MotionType = MotionType.JOINT_INTERPOLATED
