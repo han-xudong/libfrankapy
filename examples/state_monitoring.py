@@ -141,7 +141,8 @@ class RobotStateMonitor:
             roll, pitch, yaw = quaternion_to_euler(*cart_ori)
             euler_deg = np.degrees([roll, pitch, yaw])
             print(f"Orientation (deg): {euler_deg:.1f}")
-        except Exception:
+        except Exception:  # nosec B110
+            # Silently ignore conversion errors - quaternion display is optional
             pass
 
         print("\n--- External Forces ---")

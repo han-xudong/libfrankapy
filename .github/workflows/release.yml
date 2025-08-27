@@ -324,9 +324,13 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [publish-pypi]
     permissions:
-      contents: write  # Required for GitHub Pages deployment
+      contents: read   # Required to read repository contents
       pages: write     # Required for GitHub Pages deployment
       id-token: write  # Required for GitHub Pages deployment
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
     - name: Checkout code
@@ -337,27 +341,40 @@ jobs:
         VERSION=${GITHUB_REF#refs/tags/v}
         echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-        python-version: ${{ env.PYTHON_VERSION }}
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: docs/package-lock.json
 
-    - name: Install documentation dependencies
+    - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install sphinx sphinx-rtd-theme myst-parser
-        pip install libfrankapy==${{ env.VERSION }}
+        cd docs
+        npm ci
 
     - name: Build documentation
       run: |
         cd docs
-        make html
+        npm run docs:build
+
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: docs/.vitepress/dist/
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+    - name: Upload documentation artifact
+      uses: actions/upload-artifact@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/_build/html
+        name: documentation
+        path: docs/.vitepress/dist/
 
   # Notification
   notify:
